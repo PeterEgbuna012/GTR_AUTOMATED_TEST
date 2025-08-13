@@ -334,8 +334,6 @@ namespace GTR_AUTOMATED.StepDefinitions
         public void GivenIFilterTableReport(Table table)
         {
             string Report = table.Rows[0]["Report"];
-
-
             pom.FilterTableReport(Report);
         }
 

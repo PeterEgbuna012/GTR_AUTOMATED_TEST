@@ -137,12 +137,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
    await testRunner.AndAsync("I select action Run Reports", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table362 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table460 = new global::Reqnroll.Table(new string[] {
                             "Reports"});
-                table362.AddRow(new string[] {
+                table460.AddRow(new string[] {
                             "Historic Stock Value Report"});
 #line 10
-    await testRunner.AndAsync("I filter table Reports:", ((string)(null)), table362, "And ");
+    await testRunner.AndAsync("I filter table Reports:", ((string)(null)), table460, "And ");
 #line hidden
 #line 13
    await testRunner.AndAsync("I select no. 1 record from Reports table record", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -150,12 +150,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 14
    await testRunner.AndAsync("I set start date and end date", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table363 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table461 = new global::Reqnroll.Table(new string[] {
                             "Storeroom"});
-                table363.AddRow(new string[] {
+                table461.AddRow(new string[] {
                             "=HE-VALUE"});
 #line 15
-   await testRunner.AndAsync("I filter table Historic Stock Report Storeroom:", ((string)(null)), table363, "And ");
+   await testRunner.AndAsync("I filter table Historic Stock Report Storeroom:", ((string)(null)), table461, "And ");
 #line hidden
 #line 19
    await testRunner.AndAsync("I submit Historic Stock Value Report", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");

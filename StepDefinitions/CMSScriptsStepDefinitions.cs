@@ -1,10 +1,22 @@
+using Allure.Net.Commons;
 using GTR_AUTOMATED.Pages;
 using GTR_AUTOMATED.Utilities;
 using GTR_Automated_Tests.Pages;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.BiDi.Log;
 using Reqnroll;
+using Reqnroll.Bindings;
 using System.Numerics;
+using System.Reflection.Emit;
+using TechTalk.SpecFlow;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static System.Net.Mime.MediaTypeNames;
+using BindingAttribute = TechTalk.SpecFlow.BindingAttribute;
+using GivenAttribute = Reqnroll.GivenAttribute;
+using PendingStepException = Reqnroll.PendingStepException;
+using Table = Reqnroll.Table;
 
 namespace GTR_AUTOMATED.StepDefinitions
 {
@@ -29,6 +41,14 @@ namespace GTR_AUTOMATED.StepDefinitions
             var loginPage = new LoginPage(driver);
             loginPage.LoginAsTrainingManager();
             AllureLogger.SetUserLoginRole("training manager");
+        }
+
+        [Given("I sign cms team leader")]
+        public void GivenISignCmsTeamLeader()
+        {
+            var loginPage = new LoginPage(driver);
+            loginPage.LoginAsCmsTeamLeader();
+            AllureLogger.SetUserLoginRole("cms team leader");
         }
 
         [Given("I sign as cms admin team leader")]
@@ -212,7 +232,7 @@ namespace GTR_AUTOMATED.StepDefinitions
         [Given("I select Ok Button")]
         public void GivenISelectOkButton()
         {
-            AllureLogger.LogStep("I select Ok Button",
+              AllureLogger.LogStep("I select Ok Button",
                 pom.SelectOkButton);
         }
 
@@ -984,6 +1004,1125 @@ namespace GTR_AUTOMATED.StepDefinitions
             AllureLogger.LogStep("I take screenshot of Creating a new Training Course Work Order Template Test Scenario four",
             pom.TakeScreenshotOfCreatingANewTrainingCourseWorkOrderTemplateTestScenariofour);
         }
+
+
+
+
+
+        //Creating a new Training Course Work Order Steps Definitions
+
+
+
+        [Given("I enter work order:")]
+        public void GivenIEnterWorkOrder(Table table)
+        {
+            string Description = table.Rows[0]["Description"];
+            AllureLogger.LogStep($"I enter work order: {Description}", () =>
+            pom.EnterWorkOrder(Description));
+        }
+
+        [Given("I set Work Type field:")]
+        public void GivenISetWorkTypeField(Table table)
+        {
+            string WorkType = table.Rows[0]["Work Type"];
+            AllureLogger.LogStep($"I set Work Type field: {WorkType}", () =>
+            pom.SetWorkTypeField(WorkType));
+        }
+
+
+
+        [Given("I verify work order status WAIT-REV")]
+        public void GivenIVerifyWorkOrderStatusWAIT_REV()
+        {
+            AllureLogger.LogStep("I verify work order status WAIT-REV",
+            pom.VerifyWorkOrderStatusWAITREV);
+        }
+
+        [Given("I take screenshot of Creating a new Training Course Work Order test")]
+        public void GivenITakeScreenshotOfCreatingANewTrainingCourseWorkOrderTest()
+        {
+            AllureLogger.LogStep("I take screenshot of Creating a new Training Course Work Order test",
+            pom.TakeScreenshotOfCreatingANewTrainingCourseWorkOrderTest);
+        }
+
+
+
+
+
+        // Scheduling a Training Course (in Graphical Scheduling) Steps Definitions
+
+
+
+
+
+
+        [Given("I open application Graphical Scheduling")]
+        public void GivenIOpenApplicationGraphicalScheduling()
+        {
+            AllureLogger.LogStep("Go To Menu",
+                pom.OpenGoToMenu);
+            AllureLogger.LogStep("Planning And Scheduling Menu Button",
+                pom.PlanningAndSchedulingMenuButton);
+            AllureLogger.LogStep("Launch Graphical Scheduling Button",
+                pom.GraphicalSchedulingButton);
+        }
+
+        [Given("I select create new schedule")]
+        public void GivenISelectCreateNewSchedule()
+        {
+            AllureLogger.LogStep("I select create new schedule",
+            pom.SelectCreateNewSchedule);
+        }
+
+        [Given("I enter Schedule ID:")]
+        public void GivenIEnterScheduleID(Table table)
+        {
+            string ID = table.Rows[0]["ID"];
+            string Description = table.Rows[0]["Description"];
+            pom.EnterScheduleID(ID, Description);
+        }
+
+        [Given("I choose Select Value from Detail Menu of calendar field")]
+        public void GivenIChooseSelectValueFromDetailMenuOfCalendarField()
+        {
+            AllureLogger.LogStep("Detail Menu Of calendar",
+               pom.DetailMenuOfcalendar);
+            AllureLogger.LogStep("Select Value Option of calendar",
+                pom.SelectValueOptionOfcalendar);
+        }
+
+        [Given("I select GTRBASE")]
+        public void GivenISelectGTRBASE()
+        {
+            AllureLogger.LogStep("I select GTRBASE",
+            pom.SelectGTRBASE);
+        }
+
+        [Given("I select Copy Query button under Work Queries section")]
+        public void GivenISelectCopyQueryButtonUnderWorkQueriesSection()
+        {
+            AllureLogger.LogStep("I select Copy Query button under Work Queries section",
+            pom.SelectCopyQueryButtonUnderWorkQueriesSection);
+        }
+
+        [Given("I filter table Query:")]
+        public void GivenIFilterTableQuery(Table table)
+        {
+            string Query = table.Rows[0]["Query"];
+            AllureLogger.LogStep($"I filter table Query: {Query}", () =>
+            pom.FilterTableQuery(Query));
+        }
+
+        [Given("I select no. {int} from Query table records")]
+        public void GivenISelectNo_FromQueryTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} record from Query table records",
+            () => pom.SelectNoFromQueryTableRecords(recordNumber));
+        }
+
+        [Given("I press dialog ok button of copy Query")]
+        public void GivenIPressDialogOkButtonOfCopyQuery()
+        {
+            AllureLogger.LogStep("I press dialog ok button of copy Query",
+            pom.PressDialogOkButtonOfCopyQuery);
+        }
+
+
+        [Given("I wait for Query to load")]
+        public void GivenIWaitForQueryToLoad()
+        {
+            AllureLogger.LogStep("I wait for Query to load",
+           pom.WaitForQueryToLoad);
+        }
+
+        [Given("I go to tab Graphical View")]
+        public void GivenIGoToTabGraphicalView()
+        {
+            AllureLogger.LogStep("I go to tab Graphical View",
+            pom.GoToTabGraphicalView);
+        }
+
+        [Given("I wait for Graphical page to load")]
+        public void GivenIWaitForGraphicalPageToLoad()
+        {
+            AllureLogger.LogStep("I wait for Query to load",
+           pom.WaitForGraphicalPageToLoad);
+        }
+
+        [Given("I select Commit Changes")]
+        public void GivenISelectCommitChanges()
+        {
+            AllureLogger.LogStep("I select Commit Changes",
+            pom.SelectCommitChanges);
+        }
+
+        [Given("I click yes dialog button")]
+        public void GivenIClickYesDialogButton()
+        {
+            AllureLogger.LogStep("I click yes dialog button",
+            pom.ClickYesDialogButton);
+        }
+
+        [Given("I press OK dialog button of system message")]
+        public void GivenIPressOKDialogButtonOfSystemMessage()
+        {
+            AllureLogger.LogStep("I press OK dialog button of system message",
+            pom.PressOKDialogButtonOfSystemMessage);
+        }
+
+        [Given("I change status to Approved")]
+        public void GivenIChangeStatusToApproved()
+        {
+            AllureLogger.LogStep("I select Change Status",
+            pom.ChangeStatus);
+            AllureLogger.LogStep("Drop Down Menu Option",
+            pom.DropDownMenuOption);
+            AllureLogger.LogStep("I select Approved",
+            pom.SelectApproved);
+        }
+
+        [Given("I select ok")]
+        public void GivenISelectOk()
+        {
+            AllureLogger.LogStep("I select ok",
+            pom.SelectOk);
+        }
+
+        [Given("I go to tab Schedule")]
+        public void GivenIGoToTabSchedule()
+        {
+            AllureLogger.LogStep("I go to tab Schedule",
+            pom.GoToTabSchedule);
+        }
+
+
+        [Given("I verify status APPROVED")]
+        public void GivenIVerifyStatusAPPROVED()
+        {
+             AllureLogger.LogStep("I verify status is APPROVED",
+             pom.VerifyStatusAPPROVED);
+        }
+
+        [Given("I take screenshot of Scheduling a Training Course \\(in Graphical Scheduling) Test Scenario one")]
+        public void GivenITakeScreenshotOfSchedulingATrainingCourseInGraphicalSchedulingTestScenarioOne()
+        {
+             AllureLogger.LogStep("I take screenshot of Scheduling a Training Course \\(in Graphical Scheduling) Test Scenario one",
+             pom.TakeScreenshotOfSchedulingATrainingCourseInGraphicalSchedulingTestScenarioOne);
+        }
+
+               
+        [Given("I filter table Graphical Scheduling:")]
+        public void GivenIFilterTableGraphicalScheduling(Table table)
+        {
+            string GraphicalScheduling = table.Rows[0]["ID"];
+            AllureLogger.LogStep($"I filter Graphical Scheduling: {GraphicalScheduling}", () =>
+            pom.FilterTableGraphicalScheduling(GraphicalScheduling));
+        }
+
+        [Given("I select no. {int} record from Graphical Scheduling table records")]
+        public void GivenISelectNo_RecordFromGraphicalSchedulingTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} record from  Graphical Scheduling table records",
+            () => pom.SelectNoRecordFromGraphicalSchedulingTableRecords(recordNumber));
+        }
+
+        [Given("I select delete Graphical Scheduling record")]
+        public void GivenISelectDeleteGraphicalSchedulingRecord()
+        {
+            AllureLogger.LogStep("I select delete Graphical Scheduling record",
+            pom.SelectDeleteGraphicalSchedulingRecord);
+        }
+
+        [Given("I verify Graphical Scheduling table has no records")]
+        public void GivenIVerifyGraphicalSchedulingTableHasNoRecords()
+        {
+            AllureLogger.LogStep("I verify Graphical Scheduling table has no records",
+                pom.VerifyGraphicalSchedulingTableHasNoRecords);
+        }
+
+        [Given("I take screenshot of Scheduling a Training Course \\(in Graphical Scheduling) Test Scenario two")]
+        public void GivenITakeScreenshotOfSchedulingATrainingCourseInGraphicalSchedulingTestScenarioTwo()
+        {
+            AllureLogger.LogStep("I take screenshot of Scheduling a Training Course \\(in Graphical Scheduling) Test Scenario two",
+            pom.TakeScreenshotOfSchedulingATrainingCourseInGraphicalSchedulingTestScenariotwo);
+        }
+
+
+
+
+
+        // Scheduling a Training Course (in Work Order Tracking) Steps Definitions 
+
+
+
+
+        [Given("I take screenshot of Scheduling a Training Course \\(in Work Order Tracking) Test Scenario one")]
+        public void GivenITakeScreenshotOfSchedulingATrainingCourseInWorkOrderTrackingTestScenarioOne()
+        {
+            AllureLogger.LogStep("I take screenshot of Scheduling a Training Course (in Work Order Tracking) Test Scenario one",
+            pom.TakeScreenshotOfSchedulingATrainingCourseInWorkOrderTrackingTestScenarioOne);
+        }
+
+        [Given("I open application CMS Course Work Order \\(MXR)")]
+        public void GivenIOpenApplicationCMSCourseWorkOrderMXR()
+        {
+            AllureLogger.LogStep("Go To Menu",
+                pom.OpenGoToMenu);
+            AllureLogger.LogStep("Open Work Order Menu",
+                pom.OpenWorkOrderMenu);
+            AllureLogger.LogStep("Launch CMS Course Work Order (MXR)",
+                pom.OpenApplicationCMSCourseWorkOrderMXR);
+        }
+
+        [Given("I filter table CMS Course Work Order:")]
+        public void GivenIFilterTableCMSCourseWorkOrder(Table table)
+        {
+            string Description = table.Rows[0]["Description"];
+            AllureLogger.LogStep($"I filter CMS Course Work Order: {Description}", () =>
+            pom.FilterTableCMSCourseWorkOrder(Description));
+        }
+
+        [Given("I select no. {int} from CMS Course Work Order table records")]
+        public void GivenISelectNo_FromCMSCourseWorkOrderTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} record from CMS Course Work Order table records",
+           () => pom.SelectNoFromCMSCourseWorkOrderTableRecords(recordNumber));
+        }
+
+        [Given("I Set Scheduled Start")]
+        public void GivenISetScheduledStart()
+        {
+            AllureLogger.LogStep("I Set Scheduled Start",
+                pom.SetScheduledStart);
+        }
+
+        [Given("I Set Scheduled Finish date")]
+        public void GivenISetScheduledFinishDate()
+        {
+            AllureLogger.LogStep("I Set Scheduled Finish date",
+                pom.SetScheduledFinishDate);
+        }
+
+        [Given("I verify Scheduled Start")]
+        public void GivenIVerifyScheduledStart()
+        {
+            AllureLogger.LogStep("I verify Scheduled Start",
+              pom.VerifyGeneratedWorkOrderNumber);
+        }
+
+        [Given("I take screenshot of Scheduling a Training Course \\(in Work Order Tracking) Test Scenario two")]
+        public void GivenITakeScreenshotOfSchedulingATrainingCourseInWorkOrderTrackingTestScenarioTwo()
+        {
+            AllureLogger.LogStep("I take screenshot of Scheduling a Training Course (in Work Order Tracking) Test Scenario two",
+            pom.TakeScreenshotOfSchedulingATrainingCourseInWorkOrderTrackingTestScenarioTwo);
+        }
+
+
+
+
+        // Allocating a Trainer & Classroom to a Training Course (in Graphical Assignment) Steps Definitions
+
+
+
+        [Given("I enter Long Description :")]
+        public void GivenIEnterLongDescription(Table table)
+        {
+            string LongDescription = table.Rows[0]["Long Description"];
+            AllureLogger.LogStep($"I filter CMS Course Work Order: {LongDescription}", () =>
+            pom.EnterLongDescription(LongDescription));
+        }
+
+        [Given("I select the Ok button")]
+        public void GivenISelectTheOkButton()
+        {
+            AllureLogger.LogStep("I select the Ok button",
+            pom.SelectTheOkButton);
+        }
+
+        [Given("I select list view button")]
+        public void GivenISelectListViewButton()
+        {
+            AllureLogger.LogStep("I select list view button",
+            pom.SelectListViewButton);
+        }
+
+        [Given("I filter Graphical Scheduling Table:")]
+        public void GivenIFilterGraphicalSchedulingTable(Table table)
+        {
+            string ID = table.Rows[0]["ID"];
+            AllureLogger.LogStep($"I filter Graphical Scheduling: {ID}", () =>
+            pom.FilterGraphicalSchedulingTable(ID));
+        }
+
+        [Given("I select no. {int} from Graphical Scheduling table records")]
+        public void GivenISelectNo_FromGraphicalSchedulingTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} record from Graphical Scheduling table records",
+          () => pom.SelectNoFromGraphicalSchedulingTableRecords(recordNumber));
+        }
+
+        [Given("I take screenshot of Allocating a Trainer & Classroom to a Training Course \\(in Graphical Assignment) Test Scenario one")]
+        public void GivenITakeScreenshotOfAllocatingATrainerClassroomToATrainingCourseInGraphicalAssignmentTestScenarioOne()
+        {
+            AllureLogger.LogStep("I take screenshot of Allocating a Trainer & Classroom to a Training Course (in Graphical Assignment) Test Scenario one",
+            pom.TakeScreenshotOfAllocatingATrainerClassroomToATrainingCourseInGraphicalAssignmentTestScenarioOne);
+        }
+
+        [Given("I take screenshot of Delete Allocating a Trainer & Classroom to a Training Course \\(in Graphical Assignment) Test Scenario two")]
+        public void GivenITakeScreenshotOfDeleteAllocatingATrainerClassroomToATrainingCourseInGraphicalAssignmentTestScenarioTwo()
+        {
+            AllureLogger.LogStep("I take screenshot of Allocating a Trainer & Classroom to a Training Course (in Graphical Assignment) Test Scenario two",
+            pom.TakeScreenshotOfAllocatingATrainerClassroomToATrainingCourseInGraphicalAssignmentTestScenariotwo);
+        }
+
+
+
+
+
+
+        // Allocating a Trainer & Classroom to a Training Course (in Work Order Tracking) Steps Definitions
+
+
+
+
+        [Given("I take screenshot of Allocating a Trainer & Classroom to a Training Course \\(in Work Order Tracking) test scenario one")]
+        public void GivenITakeScreenshotOfAllocatingATrainerClassroomToATrainingCourseInWorkOrderTrackingTestScenarioOne()
+        {
+
+            AllureLogger.LogStep("I take screenshot of Allocating a Trainer & Classroom to a Training Course (in Work Order Tracking) test scenario one",
+            pom.TakeScreenshotOfAllocatingATrainerClassroomToATrainingCourseInWorkOrderTrackingTestScenarioOne);
+
+        }
+
+        [Given("I filter work Order:")]
+        public void GivenIFilterWorkOrder(Table table)
+        {
+            string description = table.Rows[0]["Description"];
+            string WorkType = table.Rows[0]["Work Type"];
+            pom.FilterWorkOrder(description, WorkType);
+        }
+
+
+
+        [Given("I select no. {int} record from work Order table records")]
+        public void GivenISelectNo_RecordFromWorkOrderTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} from Work Order table records",
+              () => pom.SelectNoRecordFromWorkOrderTableRecords(recordNumber));
+        }
+
+        [Given("I Reschedule Start Date tomorrow's date")]
+        public void GivenIRescheduleStartDateTomorrowsDate()
+        {
+            AllureLogger.LogStep("I Set Scheduled Start",
+                pom.RescheduleStartDateTomorrowsDate);
+        }
+
+        [Given("I take screenshot of Allocating a Trainer & Classroom to a Training Course \\(in Work Order Tracking) Test Scenario two")]
+        public void GivenITakeScreenshotOfAllocatingATrainerClassroomToATrainingCourseInWorkOrderTrackingTestScenarioTwo()
+        {
+            AllureLogger.LogStep("I take screenshot of Allocating a Trainer & Classroom to a Training Course (in Work Order Tracking) test scenario two",
+            pom.TakeScreenshotOfAllocatingATrainerClassroomToATrainingCourseInWorkOrderTrackingTestScenariotwo);
+        }
+
+
+
+
+
+
+
+        // Allocating a Trainer, Classroom & Trainees to a Training Course (in Graphical Assignment) Steps Definitions
+
+
+
+        [Given("I open application Graphical Assignment")]
+        public void GivenIOpenApplicationGraphicalAssignment()
+        {
+            AllureLogger.LogStep("Go To Menu",
+                pom.OpenGoToMenu);
+            AllureLogger.LogStep("Planning And Scheduling Menu Button",
+                pom.PlanningAndSchedulingMenuButton);
+            AllureLogger.LogStep("Launch Graphical Assignment",
+                pom.GraphicalAssignment);
+        }
+
+        [Given("I enter Assignment:")]
+        public void GivenIEnterAssignment(Table table)
+        {
+            string ID = table.Rows[0]["ID"];
+            string Description = table.Rows[0]["Description"];
+            pom.EnterAssignment(ID, Description);
+        }
+
+        [Given("I open Select Value lookup of Shift field")]
+        public void GivenIOpenSelectValueLookupOfShiftField()
+        {
+            AllureLogger.LogStep("I open Select Value lookup of Shift field",
+            pom.OpenSelectValueLookupOfShiftField);
+        }
+                       
+        [Given("I select no. {int} from Shift table records")]
+        public void GivenISelectNo_FromShiftTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} from Shift table records",
+              () => pom.SelectNoFromShiftTableRecords(recordNumber));
+        }
+
+        [Given("I Press Ok dialog select Shift button")]
+        public void GivenIPressOkDialogSelectShiftButton()
+        {
+            AllureLogger.LogStep("I Press Ok dialog select Shift button",
+            pom.PressOkDialogSelectShiftButton);
+        }
+
+
+        [Given("I filter Graphical Scheduling:")]
+        public void GivenIFilterGraphicalScheduling(Table table)
+        {
+            string Description = table.Rows[0]["Description"];
+            AllureLogger.LogStep($"I filter Graphical Scheduling: {Description}", () =>
+            pom.FilterGraphicalScheduling(Description));
+        }
+
+        [Given("I select no. {int} record from Graphical table records")]
+        public void GivenISelectNo_RecordFromGraphicalTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} from Graphical table records",
+              () => pom.SelectNoRecordFromGraphicalTableRecords(recordNumber));
+        }
+
+
+        [Given("I go to tab Work View")]
+        public void GivenIGoToTabWorkView()
+        {
+            AllureLogger.LogStep("I go to tab Work View",
+            pom.GoToTabWorkView);
+        }
+
+        [Given("I wait for Work View page to load")]
+        public void GivenIWaitForWorkViewPageToLoad()
+        {
+            AllureLogger.LogStep("I wait for Work View page to load",
+           pom.WaitForWorkViewPageToLoad);
+        }
+        
+
+        [Given("I take screenshot of Allocating a Trainer, Classroom & Trainees to a Training Course \\(in Graphical Assignment) Test Scenario one")]
+        public void GivenITakeScreenshotOfAllocatingATrainerClassroomTraineesToATrainingCourseInGraphicalAssignmentTestScenarioOne()
+        {
+            AllureLogger.LogStep("I take screenshot of Allocating a Trainer, Classroom & Trainees to a Training Course \\(in Graphical Assignment) Test Scenario one",
+            pom.TakeScreenshotOfAllocatingATrainerClassroomTraineesToATrainingCourseInGraphicalAssignmentTestScenarioOne);
+        }
+
+        [Given("I take screenshot of Allocating a Trainer, Classroom & Trainees to a Training Course \\(in Graphical Assignment) Test Scenario two")]
+        public void GivenITakeScreenshotOfAllocatingATrainerClassroomTraineesToATrainingCourseInGraphicalAssignmentTestScenarioTwo()
+        {
+            AllureLogger.LogStep("I take screenshot of Allocating a Trainer, Classroom & Trainees to a Training Course \\(in Graphical Assignment) Test Scenario one",
+            pom.TakeScreenshotOfAllocatingATrainerClassroomTraineesToATrainingCourseInGraphicalAssignmentTestScenariotwo);
+        }
+
+
+
+
+
+
+
+
+        // Allocating a Trainee to a Training Course (in Work Order Tracking) Steps Definitions
+
+
+
+
+        [Given("I take screenshot of Allocating a Trainee to a Training Course \\(in Work Order Tracking) test scenario one")]
+        public void GivenITakeScreenshotOfAllocatingATraineeToATrainingCourseInWorkOrderTrackingTestScenarioOne()
+        {
+            AllureLogger.LogStep("I take screenshot of Allocating a Trainee to a Training Course (in Work Order Tracking) test scenario one",
+            pom.TakeScreenshotOfAllocatingATraineeToATrainingCourseInWorkOrderTrackingTestScenarioOne);
+        }
+
+        [Given("I filter table CMS Course Work Order \\(MXR):")]
+        public void GivenIFilterTableCMSCourseWorkOrderMXR(Table table)
+        {
+            string Description = table.Rows[0]["Description"];
+            string Status = table.Rows[0]["Status"];
+            pom.FilterTableCMSCourseWorkOrderMXR(Description, Status);
+        }
+
+        [Given("I select New Row button under Assignments section")]
+        public void GivenISelectNewRowButtonUnderAssignmentsSection()
+        {
+            AllureLogger.LogStep("I select New Row button under Assignments section",
+            pom.SelectNewRowButtonUnderAssignmentsSection);
+        }
+
+        [Given("I choose Select Value from Detail Menu of the Craft Field")]
+        public void GivenIChooseSelectValueFromDetailMenuOfTheCraftField()
+        {
+            AllureLogger.LogStep("Detail Menu of the Craft Field",
+            pom.DetailMenuOfTheCraftField);
+            AllureLogger.LogStep("I Select Value of the Craft Field",
+            pom.SelectValueOfTheCraftField);
+        }
+
+        [Given("I filter Craft table:")]
+        public void GivenIFilterCraftTable(Table table)
+        {
+            string Craft = table.Rows[0]["Craft"];
+            AllureLogger.LogStep($"I filter Craft: {Craft}", () =>
+            pom.FilterCraftTable(Craft));
+        }
+
+        [Given("I select no. {int} from Craft table records")]
+        public void GivenISelectNo_FromCraftTableRecords(int recordNumber)
+        {
+              AllureLogger.LogStep($"I select no.{recordNumber} from Craft table records",
+              () => pom.SelectNoFromCraftTableRecords(recordNumber));
+        }
+
+        [Given("I filter Craft and skill level table:")]
+        public void GivenIFilterCraftAndSkillLevelTable(Table table)
+        {
+            string Craft = table.Rows[0]["Craft"];
+            string SkillLevel = table.Rows[0]["Skill Level"];
+            pom.FilterCraftAndSkillLevelTable(Craft, SkillLevel);
+        }
+
+        [Given("I select no. {int} from Craft and skill levl table records")]
+        public void GivenISelectNo_FromCraftAndSkillLevlTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} from Craft and skill levl table records",
+              () => pom.SelectNoFromCraftAndSkillLevlTableRecords(recordNumber));
+        }
+
+        [Given("I choose Select Value from Detail Menu of the labor field")]
+        public void GivenIChooseSelectValueFromDetailMenuOfTheLaborField()
+        {
+            AllureLogger.LogStep("Detail Menu of the labor Field",
+            pom.DetailMenuOflaborField);
+            AllureLogger.LogStep("I Select Value of the labor Field",
+            pom.SelectValueOflaborField);
+        }
+
+        [Given("I select no. {int} from labor table records")]
+        public void GivenISelectNo_FromLaborTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} from labor table records",
+              () => pom.SelectNoFromLaborTableRecords(recordNumber));
+        }
+               
+
+        [Given("I verify Assignments status is ASSIGNED")]
+        public void GivenIVerifyAssignmentsStatusIsASSIGNED()
+        {
+            AllureLogger.LogStep("I verify Assignments status is ASSIGNED",
+              pom.VerifyAssignmentsStatusIsASSIGNED);
+        }
+
+        [Given("I take screenshot of Allocating a Trainee to a Training Course \\(in Work Order Tracking) test scenario two")]
+        public void GivenITakeScreenshotOfAllocatingATraineeToATrainingCourseInWorkOrderTrackingTestScenarioTwo()
+        {
+            AllureLogger.LogStep("I take screenshot of Allocating a Trainee to a Training Course (in Work Order Tracking) test scenario two",
+            pom.TakeScreenshotOfAllocatingATraineeToATrainingCourseInWorkOrderTrackingTestScenariotwo);
+        }
+
+
+
+
+
+
+
+        //  Allocating a Trainee to a Training Course (in Work Order Tracking) 8C Steps Definitions
+
+
+
+        [Given("I take screenshot of Allocating Trainee Training Course in \\(Work Order Tracking) Test Scenario one")]
+        public void GivenITakeScreenshotOfAllocatingTraineeTrainingCourseInWorkOrderTrackingTestScenarioOne()
+        {
+            AllureLogger.LogStep("I take screenshot of Allocating Trainee Training Course in (Work Order Tracking) Test Scenario one",
+            pom.TakeScreenshotOfAllocatingTraineeTrainingCourseInWorkOrderTrackingTestScenarioOne);
+        }
+
+        [Given("I take screenshot of Allocating Trainee Training Course in \\(Work Order Tracking) Test Scenario two")]
+        public void GivenITakeScreenshotOfAllocatingTraineeTrainingCourseInWorkOrderTrackingTestScenarioTwo()
+        {
+            AllureLogger.LogStep("I take screenshot of Allocating Trainee Training Course in (Work Order Tracking) Test Scenario one",
+            pom.TakeScreenshotOfAllocatingTraineeTrainingCourseInWorkOrderTrackingTestScenariotwo);
+        }
+
+
+
+
+
+
+
+        // Assigning a Work Order to a Labour Record - Qualification Match Steps Definitions
+
+
+
+                
+
+        [Given("I go to Team Leader Routine Work Tab")]
+        public void GivenIGoToTeamLeaderRoutineWorkTab()
+        {
+            AllureLogger.LogStep("I go to Team Leader Routine Work Tab",
+            pom.GoToTeamLeaderRoutineWorkTab);
+        }
+
+        [Given("I select Work Order from the Routine Work Orders to Schedule portlet")]
+        public void GivenISelectWorkOrderFromTheRoutineWorkOrdersToSchedulePortlet()
+        {
+            AllureLogger.LogStep("I select Work Order from the Routine Work Orders to Schedule portlet",
+            pom.SelectWorkOrderFromTheRoutineWorkOrdersToSchedulePortlet);
+        }
+
+        [Given("I take screenshot of Assigning a Work Order to a Labour Record - Qualification Match Test")]
+        public void GivenITakeScreenshotOfAssigningAWorkOrderToALabourRecord_QualificationMatchTest()
+        {
+            AllureLogger.LogStep("I take screenshot of Assigning a Work Order to a Labour Record - Qualification Match Test",
+            pom.TakeScreenshotOfAssigningAWorkOrderToALabourRecordQualificationMatchTest);
+        }
+
+
+
+
+        // Labor Skill-Level Check - Update skill-levels Steps Definitions
+
+
+
+        [Given("I open application Business Rule \\(BRDB)")]
+        public void GivenIOpenApplicationBusinessRuleBRDB()
+        {
+            AllureLogger.LogStep("Open Go To Menu)",
+                 pom.OpenGoToMenu);
+            AllureLogger.LogStep("Administration Menu Button",
+                pom.AdministrationMenuButton);
+            AllureLogger.LogStep("Open Application Business Rules BRDB",
+                pom.OpenApplicationBusinessRulesBRDB);
+            
+        }
+
+        [Given("I filter table Business Rule:")]
+        public void GivenIFilterTableBusinessRule(Table table)
+        {
+            string BusinessRule = table.Rows[0]["Business Rule"];
+            AllureLogger.LogStep($"I filter Business Rule: {BusinessRule}", () =>
+            pom.FilterTableBusinessRule(BusinessRule));
+        }
+
+        [Given("I select no. {int} record from Business Rule table records")]
+        public void GivenISelectNo_RecordFromBusinessRuleTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} from Business Rule table records",
+              () => pom.SelectNoRecordFromBusinessRuleTableRecords(recordNumber));
+        }
+
+        [Given("I select New Row button under the List Values for MXRCMSSKILLLEVEL section")]
+        public void GivenISelectNewRowButtonUnderTheListValuesForMXRCMSSKILLLEVELSection()
+        {
+            AllureLogger.LogStep("I select New Row button under the List Values for MXRCMSSKILLLEVEL section",
+            pom.SelectNewRowButtonUnderTheListValuesForMXRCMSSKILLLEVELSection);
+        }
+
+        [Given("I enter Skill level Details:")]
+        public void GivenIEnterSkillLevelDetails(Table table)
+        {
+            string Skilllevel = table.Rows[0]["Skill level"];
+            string Description = table.Rows[0]["Description"];
+            pom.EnterSkillLevelDetails(Skilllevel, Description);
+        }
+
+        [Given("I take screenshot of Labor Skill-Level Check - Update skill-levels Test Scenario one")]
+        public void GivenITakeScreenshotOfLaborSkill_LevelCheck_UpdateSkill_LevelsTestScenarioOne()
+        {
+            AllureLogger.LogStep("I take screenshot of Labor Skill-Level Check - Update skill-levels Test Scenario one",
+           pom.TakeScreenshotOfLaborSkillLevelCheckUpdateSkillLevelsTestScenarioOne);
+        }
+
+        [Given("I select delete button under the List Values for MXRCMSSKILLLEVEL section")]
+        public void GivenISelectDeleteButtonUnderTheListValuesForMXRCMSSKILLLEVELSection()
+        {
+            AllureLogger.LogStep("I select delete button under the List Values for MXRCMSSKILLLEVEL section",
+            pom.SelectDeleteButtonUnderTheListValuesForMXRCMSSKILLLEVELSection);
+        }
+
+        [Given("I verify table skill levels has no records")]
+        public void GivenIVerifyTableSkillLevelsHasNoRecords()
+        {
+            AllureLogger.LogStep("I verify table has no records",
+               pom.VerifyTableSkillLevelsHasNoRecords);
+        }
+
+
+        [Given("I take screenshot of Deleting Updated skill-levels Test")]
+        public void GivenITakeScreenshotOfDeletingUpdatedSkill_LevelsTest()
+        {
+            AllureLogger.LogStep("I take screenshot of Deleting Updated skill-levels Test",
+            pom.TakeScreenshotOfDeletingUpdatedSkillLevelsTest);
+        }
+
+
+
+
+
+        // Power Ups - Initial set up Steps Definitions
+
+
+
+
+
+
+
+        [Given("I select New Row button under the List Values for MXRCMSPOWERUPS section")]
+        public void GivenISelectNewRowButtonUnderTheListValuesForMXRCMSPOWERUPSSection()
+        {
+            AllureLogger.LogStep("I select New Row button under the List Values for MXRCMSPOWERUPS section",
+            pom.SelectNewRowButtonUnderTheListValuesForMXRCMSPOWERUPSSection);
+        }
+
+        [Given("I enter MXRCMSPOWERUPS Details:")]
+        public void GivenIEnterMXRCMSPOWERUPSDetails(Table table)
+        {
+            string ID = table.Rows[0]["ID"];
+            string Description = table.Rows[0]["Description"];
+            pom.EnterMXRCMSPOWERUPSDetails(ID, Description);
+        }
+
+        [Given("I take screenshot of Power Ups")]
+        public void GivenITakeScreenshotOfPowerUps()
+        {
+            AllureLogger.LogStep("I take screenshot of Power Ups",
+            pom.TakeScreenshotOfPowerUps);
+        }
+
+        [Given("I filter table Qualifications Description:")]
+        public void GivenIFilterTableQualificationsDescription(Table table)
+        {
+            string Qualifications = table.Rows[0]["Qualifications"];
+            AllureLogger.LogStep($"I filter Qualifications: {Qualifications}", () =>
+            pom.FilterTableQualificationsDescription(Qualifications));
+        }
+
+        [Given("I enter Parent Qualification:")]
+        public void GivenIEnterParentQualification(Table table)
+        {
+            string ParentQualification = table.Rows[0]["Parent Qualification"];
+            AllureLogger.LogStep($"I enter Parent Qualification: {ParentQualification}", () =>
+            pom.EnterParentQualification(ParentQualification));
+        }
+
+        [Given("I take screenshot of Power Ups - Initial set up Test")]
+        public void GivenITakeScreenshotOfPowerUps_InitialSetUpTest()
+        {
+            AllureLogger.LogStep("I take screenshot of Power Ups - Initial set up Test",
+            pom.TakeScreenshotOfPowerUpsInitialSetUpTest);
+        }
+
+        [Given("I filter table MXRCMSPOWERUPS:")]
+        public void GivenIFilterTableMXRCMSPOWERUPS(Table table)
+        {
+            string MXRCMSPOWERUPS = table.Rows[0]["MXRCMSPOWERUPS"];
+            AllureLogger.LogStep($"I filter table MXRCMSPOWERUPS: {MXRCMSPOWERUPS}", () =>
+            pom.FilterTableMXRCMSPOWERUPS(MXRCMSPOWERUPS));
+        }
+
+        [Given("I delete MXRCMSPOWERUPS record")]
+        public void GivenIDeleteMXRCMSPOWERUPSRecord()
+        {
+            AllureLogger.LogStep("I delete MXRCMSPOWERUPS record",
+            pom.DeleteMXRCMSPOWERUPSRecord);
+        }
+
+        [Given("I take screenshot of Deleting skill-levels Test")]
+        public void GivenITakeScreenshotOfDeletingSkill_LevelsTest()
+        {
+            AllureLogger.LogStep("I take screenshot of Deleting skill-levels Test",
+            pom.TakeScreenshotOfDeletingSkillLevelsTest);
+        }
+
+
+
+
+
+
+        // Power Ups - Managing failed Power Ups Steps Definitions
+
+
+
+
+
+        [Given("I set \\(Radio) field Uncheck all Power Up Fail to false")]
+        public void GivenISetRadioFieldUncheckAllPowerUpFailToFalse()
+        {
+            AllureLogger.LogStep("I set \\(Radio) field Uncheck all Power Up Fail to false",
+            pom.SetRadioFieldUncheckAllPowerUpFailToFalse);
+        }
+
+        [Given("I take screenshot of Power Ups - Managing failed Power Ups Test")]
+        public void GivenITakeScreenshotOfPowerUps_ManagingFailedPowerUpsTest()
+        {
+            AllureLogger.LogStep("I take screenshot of Deleting skill-levels Test",
+            pom.TakeScreenshotOfPowerUpsManagingFailedPowerUpsTest);
+        }
+
+
+
+
+
+        // Creation of Campaigns work order Steps Definitions
+
+
+
+        [Given("I take screenshot of Creation of Campaigns work order Test Scenario one")]
+        public void GivenITakeScreenshotOfCreationOfCampaignsWorkOrderTestScenarioOne()
+        {
+            AllureLogger.LogStep("take screenshot of Creation of Campaigns work order Test Scenario one",
+            pom.TakeScreenshotOfCreationOfCampaignsWorkOrderTestScenarioOne);
+        }
+
+        [Given("I take screenshot of Creation of Campaigns work order Test Scenario two")]
+        public void GivenITakeScreenshotOfCreationOfCampaignsWorkOrderTestScenarioTwo()
+        {
+            AllureLogger.LogStep("take screenshot of Creation of Campaigns work order Test Scenario two",
+            pom.TakeScreenshotOfCreationOfCampaignsWorkOrderTestScenariotwo);
+        }
+
+        [Given("I open application Campaigns \\(Tr)")]
+        public void GivenIOpenApplicationCampaignsTr()
+        {
+            AllureLogger.LogStep("Go To Menu",
+                pom.OpenGoToMenu);
+            AllureLogger.LogStep("Open Work Order Menu",
+                pom.OpenWorkOrderMenu);
+            AllureLogger.LogStep("Launch application Campaigns (TR)",
+                pom.OpenApplicationCampaignsTr);
+        }
+
+        [Given("I select New Campaign")]
+        public void GivenISelectNewCampaign()
+        {
+             AllureLogger.LogStep("I select New Campaign",
+             pom.SelectNewCampaign);
+        }
+
+        [Given("I enter Campaign Details:")]
+        public void GivenIEnterCampaignDetails(Table table)
+        {
+            string Campaign = table.Rows[0]["Campaign Description"];
+            AllureLogger.LogStep($"I enter Campaign Details: {Campaign}", () =>
+            pom.EnterCampaignDetails(Campaign));
+        }
+
+        [Given("I select long Description button")]
+        public void GivenISelectLongDescriptionButton()
+        {
+            AllureLogger.LogStep("I select long Description button",
+             pom.SelectLongDescriptionButton);
+        }
+
+        [Given("I enter Campaigns long Description:")]
+        public void GivenIEnterCampaignsLongDescription(Table table)
+        {
+            string LongDescription = table.Rows[0]["Long Description"];
+            AllureLogger.LogStep($"I enter long Description: {LongDescription}", () =>
+            pom.EnterCampaignLongDescription(LongDescription));
+        }
+
+        
+        [Given("I click button ok")]
+        public void GivenIClickButtonOk()
+        {
+            AllureLogger.LogStep("I click button ok",
+             pom.ClickButtonOk);
+        }
+
+        [Given("I enter Campaign Reference:")]
+        public void GivenIEnterCampaignReference(Table table)
+        {
+            string CampaignReference = table.Rows[0]["Campaign Reference"];
+            AllureLogger.LogStep($"I enter Campaign Reference: {CampaignReference}", () =>
+            pom.EnterCampaignReference(CampaignReference));
+        }
+
+        [Given("I open Select Value lookup of priority field")]
+        public void GivenIOpenSelectValueLookupOfPriorityField()
+        {
+            AllureLogger.LogStep("I open Select Value lookup of priority field",
+             pom.OpenSelectValueLookupOfPriorityField);
+        }
+
+        [Given("I filter table Priority:")]
+        public void GivenIFilterTablePriority(Table table)
+        {
+            string Priority = table.Rows[0]["Priority"];
+            AllureLogger.LogStep($"I filter table Priority: {Priority}", () =>
+            pom.FilterTablePriority(Priority));
+        }
+
+        [Given("I go to tab Work Package")]
+        public void GivenIGoToTabWorkPackage()
+        {
+            AllureLogger.LogStep("I go to tab Work Package",
+            pom.GoToTabWorkPackage);
+        }
+
+        [Given("I click Select Asset List button")]
+        public void GivenIClickSelectAssetListButton()
+        {
+             AllureLogger.LogStep("I click Select Asset List button",
+             pom.ClickSelectAssetListButton);
+        }
+
+        [Given("I select the Detail Menu of the asset and go to the Asset List \\(Tr)")]
+        public void GivenISelectTheDetailMenuOfTheAssetAndGoToTheAssetListTr()
+        {
+            AllureLogger.LogStep("I select the Detail Menu of the asset",
+            pom.SelectTheDetailMenuOfTheAsset);
+            AllureLogger.LogStep("I select Go To The Asset Tr",
+            pom.GoToAssetTr);
+            AllureLogger.LogStep("Asset Tr Application",
+            pom.AssetTrApplication);
+        }
+
+        [Given("I filter table Campaigns Asset:")]
+        public void GivenIFilterTableCampaignsAsset(Table table)
+        {
+            string Asset = table.Rows[0]["Asset"];
+            AllureLogger.LogStep($"I filter table Campaigns Asset: {Asset}", () =>
+            pom.FilterTableCampaignsAsset(Asset));
+        }
+
+        [Given("I select no. {int} record from Campaigns Asset table records")]
+        public void GivenISelectNo_RecordFromCampaignsAssetTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} from Campaigns Asset table records",
+              () => pom.SelectNoRecordFromCampaignsAssetTableRecords(recordNumber));
+        }
+
+        [Given("I select Return With Value option")]
+        public void GivenISelectReturnWithValueOption()
+        {
+            AllureLogger.LogStep("I select Return With Value option",
+             pom.SelectReturnWithValueOption);
+        }
+
+        [Given("I select the Ok dialog button")]
+        public void GivenISelectTheOkDialogButton()
+        {
+            AllureLogger.LogStep("I select the Ok dialog button",
+             pom.SelectTheOkDialogButton);
+        }
+
+        [Given("I select no. {int} record from Work Package table records")]
+        public void GivenISelectNo_RecordFromWorkPackageTableRecords(int recordNumber)
+        {
+              AllureLogger.LogStep($"I select no.{recordNumber} from Work Package table records",
+              () => pom.SelectNoRecordFromWorkPackageTableRecords(recordNumber));
+        }
+
+        [Given("I select the Detail Menu of the Work Location and go to the Locations \\(Tr)")]
+        public void GivenISelectTheDetailMenuOfTheWorkLocationAndGoToTheLocationsTr()
+        {
+            AllureLogger.LogStep("I select the Detail Menu of Work Locations",
+            pom.SelectTheDetailMenuOfLocation);
+            AllureLogger.LogStep("I select Go To Locations Tr",
+            pom.GoToLocationTr);
+            AllureLogger.LogStep("Locations Tr Application",
+            pom.LocationTrApplication);
+        }
+
+        [Given("I filter table Locations:")]
+        public void GivenIFilterTableLocations(Table table)
+        {
+            string Location = table.Rows[0]["Location"];
+            AllureLogger.LogStep($"I filter table Location: {Location}", () =>
+            pom.FilterTableLocations(Location));
+        }
+
+        [Given("I select no. {int} record from Work Location table records")]
+        public void GivenISelectNo_RecordFromWorkLocationTableRecords(int recordNumber)
+        {
+              AllureLogger.LogStep($"I select no.{recordNumber} from Location table records",
+               () => pom.SelectNoRecordFromWorkLocationTableRecords(recordNumber));
+        }
+
+        [Given("I select the Detail Menu of the Job Plans and go to the Job Plans \\(Tr)")]
+        public void GivenISelectTheDetailMenuOfTheJobPlansAndGoToTheJobPlansTr()
+        {
+            AllureLogger.LogStep("I select the Detail Menu of Job Plans",
+            pom.SelectTheDetailMenuOfJobPlans);
+            AllureLogger.LogStep("I select Go To Job Plans",
+            pom.GoToJobPlans);
+            AllureLogger.LogStep("Job Plans Application",
+            pom.JobPlansApplication);
+        }
+
+        [Given("I press dialog ok button")]
+        public void GivenIPressDialogOkButton()
+        {
+            AllureLogger.LogStep("I press dialog ok button",
+            pom.PressDialogOkButton);
+        }
+
+        [Given("I Approved Campaign")]
+        public void GivenIApprovedCampaign()
+        {
+            AllureLogger.LogStep("I Approved Campaign",
+            pom.ApprovedCampaign);
+        }
+
+
+        [Given("I verify Campaign status")]
+        public void GivenIVerifyCampaignStatus()
+        {
+            AllureLogger.LogStep("I verify Campaign status SCHEDULED",
+              pom.VerifyCampaignStatus);
+        }
+
+        [Given("I Generate Campaign work order")]
+        public void GivenIGenerateCampaignWorkOrder()
+        {
+            AllureLogger.LogStep("I Generate Campaign work order",
+             pom.GenerateCampaignWorkOrder);
+        }
+
+
+        [Given("I wait for generate work order to load")]
+        public void GivenIWaitForGenerateWorkOrderToLoad()
+        {
+            AllureLogger.LogStep("I wait for generate work order to load",
+            pom.WaitForGenerateCampaignWorkOrderToLoad);
+        }
+
+        [Given("I verify work order is generated")]
+        public void GivenIVerifyWorkOrderIsGenerated()
+        {
+               AllureLogger.LogStep("I verify work order is generated",
+               pom.VerifyWorkOrderIsGenerated);
+        }
+
+        [Given("I select Ok buttton of system message")]
+        public void GivenISelectOkButttonOfSystemMessage()
+        {
+            AllureLogger.LogStep("I select Ok buttton of system message",
+            pom.SelectOkButttonOfSystemMessage);
+        }
+
+        [Given("I verify work order generated numbers")]
+        public void GivenIVerifyWorkOrderGeneratedNumbers()
+        {
+            AllureLogger.LogStep("I verify work order generated numbers",
+               pom.VerifyWorkOrderGeneratedNumbers);
+        }
+
+        [Given("I take screenshot of Creation of Campaigns work order Test Scenario three")]
+        public void GivenITakeScreenshotOfCreationOfCampaignsWorkOrderTestScenarioThree()
+        {
+            AllureLogger.LogStep("I take screenshot of Creation of Campaigns work order Test Scenario three",
+            pom.TakeScreenshotOfCreationOfCampaignsWorkOrderTestScenariothree);
+        }
+
+
+
 
 
 

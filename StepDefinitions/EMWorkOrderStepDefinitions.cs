@@ -264,7 +264,6 @@ namespace GTR_AUTOMATED.StepDefinitions
             string description = table.Rows[0]["Description"];
             string status = table.Rows[0]["Status"];
             string WorkType = table.Rows[0]["Work Type"];
-
             pom.FilterTableEM(description, status, WorkType);
         }
 
