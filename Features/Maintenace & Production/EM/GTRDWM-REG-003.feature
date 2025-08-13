@@ -84,7 +84,7 @@ Scenario: 03)  Assigning an EM Work Order
 	 And I select Value lookup for Labor field
       And I filter table labor:
       | labor |
-      | AGRAY |
+      | CBRUNS |
 	 And I select no.1 from labor table record
      #And I pree Ok dialog system message button
 	 And I save

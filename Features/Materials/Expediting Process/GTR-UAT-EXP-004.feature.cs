@@ -140,12 +140,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 10
     await testRunner.AndAsync("I select New Purchase Requisition", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table290 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table388 = new global::Reqnroll.Table(new string[] {
                             "Purchase Requisition"});
-                table290.AddRow(new string[] {
+                table388.AddRow(new string[] {
                             "Raising a Purchase Requisition - Non-stocked Item"});
 #line 11
-    await testRunner.AndAsync("I enter following Purchase Requisition:", ((string)(null)), table290, "And ");
+    await testRunner.AndAsync("I enter following Purchase Requisition:", ((string)(null)), table388, "And ");
 #line hidden
 #line 14
  await testRunner.AndAsync("I set Required Date", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -153,12 +153,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 15
  await testRunner.AndAsync("I choose Select Value from Detail Menu of Company Field", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table291 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table389 = new global::Reqnroll.Table(new string[] {
                             "Description"});
-                table291.AddRow(new string[] {
+                table389.AddRow(new string[] {
                             "BUCK & HICKMAN (WEST THURROCK)"});
 #line 16
- await testRunner.AndAsync("I filter table Company Field:", ((string)(null)), table291, "And ");
+ await testRunner.AndAsync("I filter table Company Field:", ((string)(null)), table389, "And ");
 #line hidden
 #line 19
  await testRunner.AndAsync("I select no. 1 record from Company table record", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -178,14 +178,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 24
  await testRunner.AndAsync("I select Material from Line Type dropdown options", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table292 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table390 = new global::Reqnroll.Table(new string[] {
                             "Material Description",
                             "Line Cost"});
-                table292.AddRow(new string[] {
+                table390.AddRow(new string[] {
                             "NON-STOCKED TEST",
                             "100"});
 #line 25
- await testRunner.AndAsync("I enter following Material Details:", ((string)(null)), table292, "And ");
+ await testRunner.AndAsync("I enter following Material Details:", ((string)(null)), table390, "And ");
 #line hidden
 #line 28
     await testRunner.AndAsync("I open Select Value lookup for Order Unit field", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -196,12 +196,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 30
     await testRunner.AndAsync("I choose Select Value from Detail Menu of Work Order", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table293 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table391 = new global::Reqnroll.Table(new string[] {
                             "Description"});
-                table293.AddRow(new string[] {
+                table391.AddRow(new string[] {
                             "CREATING A FIFI CM WO"});
 #line 31
- await testRunner.AndAsync("I filter table work Order:", ((string)(null)), table293, "And ");
+ await testRunner.AndAsync("I filter table work Order:", ((string)(null)), table391, "And ");
 #line hidden
 #line 34
  await testRunner.AndAsync("I select no. 1 record from work Order table record", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -212,12 +212,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 36
  await testRunner.AndAsync("I open Select Value lookup for Ship To field", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table294 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table392 = new global::Reqnroll.Table(new string[] {
                             "Ship To"});
-                table294.AddRow(new string[] {
+                table392.AddRow(new string[] {
                             "GTR-HE"});
 #line 37
- await testRunner.AndAsync("I filter table Ship To:", ((string)(null)), table294, "And ");
+ await testRunner.AndAsync("I filter table Ship To:", ((string)(null)), table392, "And ");
 #line hidden
 #line 40
  await testRunner.AndAsync("I select no. 1 record from Ship To table record", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");

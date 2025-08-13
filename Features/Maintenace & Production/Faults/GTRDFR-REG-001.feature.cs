@@ -174,21 +174,21 @@ this.ScenarioInitialize(scenarioInfo);
 #line 22
     await testRunner.AndAsync("I select no. 1 record from Reported Priority table", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table185 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table238 = new global::Reqnroll.Table(new string[] {
                             "Headcode"});
-                table185.AddRow(new string[] {
+                table238.AddRow(new string[] {
                             "TAUTO"});
 #line 23
-    await testRunner.AndAsync("I enter following data to Headcode:", ((string)(null)), table185, "And ");
+    await testRunner.AndAsync("I enter following data to Headcode:", ((string)(null)), table238, "And ");
 #line hidden
-                global::Reqnroll.Table table186 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table239 = new global::Reqnroll.Table(new string[] {
                             "Summary",
                             "Details"});
-                table186.AddRow(new string[] {
+                table239.AddRow(new string[] {
                             "Raising a Fault Test",
                             "Raising a Fault Auto Test"});
 #line 26
-    await testRunner.AndAsync("I enter following data:", ((string)(null)), table186, "And ");
+    await testRunner.AndAsync("I enter following data:", ((string)(null)), table239, "And ");
 #line hidden
 #line 29
     await testRunner.AndAsync("I route the workflow", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");

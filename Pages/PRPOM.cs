@@ -597,8 +597,25 @@ namespace GTR_AUTOMATED.Pages
            ReportFilter.Clear();
            ReportFilter.SendKeys(Report);
            ReportFilter.SendKeys(Keys.Enter);
+           Task.Delay(5000).Wait();
 
        });
+
+        public void SelectNoFromReportsTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I Select No {recordNumber} Record From Report Table Records", () =>
+            {
+                // Assuming your selector needs to change row index [R:x] with recordNumber - 1 (zero-based)
+                int zeroBasedIndex = recordNumber - 1;
+
+                // Build dynamic Id selector by replacing the row index [R:x]
+                string selector = $"mc2d267e8_tdrow_[C:0]_ttxt-lb[R:{zeroBasedIndex}]";
+
+                SafeActions.Click(driver, By.Id(selector),
+                  $"I Select No {recordNumber} Record From Report Table Records");
+            });
+
+        }
 
 
         public void SelectNoRecordFromReportTableRecord(int recordNumber)
@@ -628,7 +645,7 @@ namespace GTR_AUTOMATED.Pages
         {
             AllureLogger.LogStep("I wait for page to load", () =>
             {
-                Task.Delay(20000).Wait();
+                Task.Delay(80000).Wait();
                 // Store the original window handle
                 string originalWindow = driver.CurrentWindowHandle;
 

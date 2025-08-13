@@ -50,8 +50,8 @@ Scenario: 01) Creation of a Qualification
       Given I sign as training manager
 	  And I open application Qualifications
 	  And I filter table Qualifications:
-      | Qualifications |
-      | AUTO 10  |
+        | Qualifications |
+        | AUTO 10  |
 	  And I select no. 1 record from Qualification table records
 	  #And I delete Craft Skill-Level
 	  #And I save record

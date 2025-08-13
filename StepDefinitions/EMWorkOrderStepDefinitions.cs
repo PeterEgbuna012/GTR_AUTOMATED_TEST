@@ -1,8 +1,10 @@
 using GTR_AUTOMATED.Pages;
 using GTR_AUTOMATED.Utilities;
 using GTR_Automated_Tests.Pages;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OpenQA.Selenium;
 using Reqnroll;
+using System.Drawing;
 using TechTalk.SpecFlow;
 using BindingAttribute = TechTalk.SpecFlow.BindingAttribute;
 using GivenAttribute = TechTalk.SpecFlow.GivenAttribute;
@@ -264,7 +266,6 @@ namespace GTR_AUTOMATED.StepDefinitions
             string description = table.Rows[0]["Description"];
             string status = table.Rows[0]["Status"];
             string WorkType = table.Rows[0]["Work Type"];
-
             pom.FilterTableEM(description, status, WorkType);
         }
 
@@ -733,7 +734,7 @@ namespace GTR_AUTOMATED.StepDefinitions
         public void WhenIPressOKButton()
         {
             AllureLogger.LogStep("I press OK button",
-          pom.PressOKButton);
+            pom.PressOKButton);
         }
 
         [When("I Status field has value INPRG-HOLD")]
@@ -801,6 +802,97 @@ namespace GTR_AUTOMATED.StepDefinitions
             AllureLogger.LogStep("I take screenshot of Approving an EM Work Order scenario five",
                 pom.TakeScreenshotOfApprovingAnEMWorkOrderScenariofive);
         }
+
+
+
+
+
+
+
+
+
+        // MWE Work Order Step Definitions
+
+
+
+
+
+        [When("I go to Plans tab")]
+        public void WhenIGoToPlansTab()
+        {
+            AllureLogger.LogStep("I go to Plans tab",
+            pom.GoToPlansTab);
+        }
+
+        [When("I press add new row under Task for work order section")]
+        public void WhenIPressAddNewRowUnderTaskForWorkOrderSection()
+        {
+            AllureLogger.LogStep("I press add new row under Task for work order section",
+           pom.PressAddNewRowUnderTaskForWorkOrderSection);
+        }
+
+        [When("I enter Task Description:")]
+        public void WhenIEnterTaskDescription(Table table)
+        {
+            string TaskDescription = table.Rows[0]["Description"];
+            AllureLogger.LogStep($"I enter Task Description: {TaskDescription}", () =>
+                pom.EnterTaskDescription(TaskDescription));
+        }
+
+        [When("I open Select Value lookup for Task Requires Tools or Comments field")]
+        public void WhenIOpenSelectValueLookupForTaskRequiresToolsOrCommentsField()
+        {
+            AllureLogger.LogStep("I open Select Value lookup for Task Requires Tools or Comments field",
+            pom.OpenSelectValueLookupForTaskRequiresToolsOrCommentsField);
+        }
+
+        [When("I select Y")]
+        public void WhenISelectY()
+        {
+            AllureLogger.LogStep("I select Y",
+            pom.SelectY);
+        }
+               
+        [When("I choose Select Value from Detail Menu of Measurement Point field")]
+        public void WhenIChooseSelectValueFromDetailMenuOfMeasurementPointField()
+        {
+            AllureLogger.LogStep("Detail Menu Of Measurement Point Field",
+               pom.DetailMenuOfMeasurementPointField);
+            AllureLogger.LogStep("Select Value Option of Measurement Point",
+                pom.SelectValueOptionofMeasurementPointField);
+        }
+
+        [When("I open Select Value lookup for Measurement Point field")]
+        public void WhenIOpenSelectValueLookupForMeasurementPointField()
+        {
+            AllureLogger.LogStep("Detail Menu Of Measurement Point Field",
+                pom.DetailMenuOfMeasurementPointField);
+        }
+
+
+        [When("I filter table Measurement Point:")]
+        public void WhenIFilterTableMeasurementPoint(Table table)
+        {
+            string MeasurementPoint = table.Rows[0]["Measurement Point"];
+            AllureLogger.LogStep($"I filter table Measurement Point: {MeasurementPoint}", () =>
+                pom.FilterTableMeasurementPoint(MeasurementPoint));
+        }
+
+        [When("I select no. {int} record from Measurement Point table")]
+        public void WhenISelectNo_RecordFromMeasurementPointTable(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} record from Measurement Point table records",
+             () => pom.SelectNoRecordFromMeasurementPointTable(recordNumber));
+        }
+
+
+
+
+
+
+
+
+
 
 
 

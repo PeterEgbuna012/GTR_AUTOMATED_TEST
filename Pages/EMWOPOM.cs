@@ -3,6 +3,7 @@ using GTR_Automated_Tests.Pages;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Reqnroll;
+using SeleniumExtras.WaitHelpers;
 
 namespace GTR_AUTOMATED.Pages
 {
@@ -1811,6 +1812,151 @@ namespace GTR_AUTOMATED.Pages
                }
 
            });
+
+
+
+
+
+
+
+
+
+
+
+        //MWE POM Steps
+
+
+
+          public void GoToPlansTab() =>
+       AllureLogger.LogStep("I go to Plans tab", () =>
+           SafeActions.Click(driver, By.Id("m356798d1-tab_anchor"),
+                          "I go to Plans tab"));
+
+
+           public void PressAddNewRowUnderTaskForWorkOrderSection() =>
+        AllureLogger.LogStep("I press add new row under Task for work order section", () =>
+        {
+             SafeActions.Click(driver, By.CssSelector("#mbb442a0c_bg_button_addrow-pb"),
+                          "I press add new row under Task for work order section");
+
+            // ⏳ Wait for 2 seconds after the click (adjust as needed)
+             Task.Delay(5000).Wait();
+        });
+
+
+
+          public void EnterTaskDescription(string TaskDescription) =>
+        AllureLogger.LogStep($"I enter Task Description '{TaskDescription}'", () =>
+        {
+            By filterFieldLocator = By.CssSelector("#mb804724a-tb2");
+
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
+            IWebElement filterField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(filterFieldLocator));
+
+            filterField.Click();
+            filterField.Clear();
+            filterField.SendKeys(TaskDescription);
+            Task.Delay(2000).Wait();
+        });
+
+
+        
+          public void OpenSelectValueLookupForTaskRequiresToolsOrCommentsField() =>
+       AllureLogger.LogStep("I open Select Value lookup for Task Requires Tools or Comments field", () =>
+           SafeActions.Click(driver, By.CssSelector("#me1871065-img"),
+                          "I open Select Value lookup for Task Requires Tools or Comments field"));
+
+
+        public void SelectY()
+        {
+            AllureLogger.LogStep("I select 'Y' from the table", () =>
+            {
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+                var cellLocator = By.Id("lookup_page1_tdrow_[C:1]_ttxt-lb[R:1]");
+                var resultTextFieldLocator = By.CssSelector("#me1871065-tb"); 
+
+                // Step 1: Wait for and click the Y cell in the table
+                wait.Until(ExpectedConditions.ElementToBeClickable(cellLocator));
+                SafeActions.Click(driver, cellLocator, "I select 'Y' from the table");
+
+                // Step 2: Wait for the text field to reflect the selection of 'Y'
+                wait.Until(driver =>
+                {
+                    try
+                    {
+                        var textField = driver.FindElement(resultTextFieldLocator);
+                        return textField.Displayed && textField.GetAttribute("value").Trim() == "Y";
+                    }
+                    catch
+                    {
+                        return false;
+                    }
+                });
+
+                // Step 3: Validate the field really contains 'Y'
+                var resultField = driver.FindElement(resultTextFieldLocator);
+                string actualValue = resultField.GetAttribute("value").Trim();
+
+                if (actualValue != "Y")
+                {
+                    throw new Exception($"Expected 'Y' in the result field, but found '{actualValue}'");
+                }
+                Task.Delay(3000).Wait();
+            });
+        }
+
+
+
+        public void DetailMenuOfMeasurementPointField() =>
+           AllureLogger.LogStep("Detail Menu Of Measurement Point Field", () =>
+               SafeActions.Click(driver,
+                   By.CssSelector("#mc9acecf2-img"),
+                   "Detail Menu Of Measurement Point Field"));
+
+
+        public void SelectValueOptionofMeasurementPointField() =>
+            AllureLogger.LogStep("Select Value Option of Measurement Point Field", () =>
+                SafeActions.Click(driver, By.Id("NORMAL_normal0_a_tnode"),
+                                  "Select Value Option of Measurement Point Field"));
+
+          public void FilterTableMeasurementPoint(string measurementPoint) =>
+        AllureLogger.LogStep($"I filter table by Measurement Point '{measurementPoint}'", () =>
+        {
+           var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            var filterFieldLocator = By.CssSelector("#lookup_page1_tfrow_\\[C\\:0\\]_txt-tb");
+
+            // Wait until the filter field is clickable
+            var filterField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(filterFieldLocator));
+
+            // Perform filter action
+            filterField.Click();
+            filterField.Clear();
+            filterField.SendKeys(measurementPoint);
+            filterField.SendKeys(Keys.Enter);
+        });
+
+
+
+        public void SelectNoRecordFromMeasurementPointTable(int recordNumber)
+        {
+            AllureLogger.LogStep($"I Select No {recordNumber} Record From Measurement Point Table Records", () =>
+            {
+                // Assuming your selector needs to change row index [R:x] with recordNumber - 1 (zero-based)
+                int zeroBasedIndex = recordNumber - 1;
+
+                // Build dynamic Id selector by replacing the row index [R:x]
+                string selector = $"lookup_page1_tdrow_[C:0]_ttxt-lb[R:{zeroBasedIndex}]";
+
+                SafeActions.Click(driver, By.Id(selector),
+                    $"I Select No {recordNumber} Record From Measurement Point Table Records");
+                Task.Delay(5000).Wait();
+            });
+
+        }
+
+
+
+
 
 
 

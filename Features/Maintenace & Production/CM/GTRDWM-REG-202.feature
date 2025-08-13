@@ -8,7 +8,9 @@ Scenario: 01) Create a CM Work Order
 	Given I sign as maxadmin
 	And I open application Work Order Tracking (BRDA)
 	And I select create new record
-	And I set CM Work Order Description field to 'AUTO TEST FIFI WO'
+	And I enter work order:
+      | Description |
+      | AUTO TEST FIFI WO |
 	And I choose Select Value from Detail Menu of Location field
 	And I filter table Location:
       | Location |

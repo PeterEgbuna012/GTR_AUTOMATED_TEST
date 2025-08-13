@@ -7,7 +7,9 @@ Scenario: 01) Create a CM Work Order
 Given I sign as maxadmin
 	And I open application Work Order Tracking (BRDA)
 	And I select create new record
-	And I set CM Work Order Description field to 'MWE TEST'
+	And I enter work order:
+      | Description |
+      | MWE TEST |
 	And I choose Select Value from Detail Menu of Location field
 	And I filter table Location:
       | Location |
@@ -57,7 +59,7 @@ Given I sign as maxadmin
   And I open Select Value lookup for Labor field
   And I filter table Labor:
       | Labor |
-      | AGRAY |
+      | CBRUNS |
   And I select no. 1 record from Labor table records
   #And I pree Ok dialog system message button
   And I verify CM work order generated

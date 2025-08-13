@@ -9,7 +9,7 @@ Scenario:01) Create a PM
     And I create new record
     And I enter Description:
       | Description |
-      | MWE TEST  |
+      | MWE TEST 9  |
     And I choose Select Value from Detail Menu of Asset Group field
     And I filter table Asset Group:
       | Asset Group |
@@ -51,7 +51,7 @@ Scenario:02) Generating Ad Hoc PM Work Order
     When I open application Preventive Maintenance, Preventative Maintenance (BRDA)
     When I filter table PMs:
       | Description | Status  | Parent |
-      | MWE TEST | =ACTIVE | ~Null~|
+      | MWE TEST 9 | =ACTIVE | ~Null~|
     And I select no. 1 record from PMs table
     And I select action Generate Work Orders
     And I set Use Frequency Criteria[Checkbox] field to false
@@ -70,14 +70,14 @@ Scenario: 03) Assigning a PM Work Order Task
   And I open application Work Order Tracking BRDA from Favorite Menu
   When I filter table PM:
 		| Description | Status | Work Type |
-		| MWE TEST | =SCHEDULED | =M1 |
+		| MWE TEST 9 | =SCHEDULED | =M1 |
     And I select no. 1 record from PMs table
   And I go to Assignments Tab
   And I add new row in Assignments Tab
   And I open Select Value lookup for Labor field
   And I filter Labor table:
       | Labor |
-      | AGRAY |
+      | CBRUNS |
   And I select no. 1 from Labor table records
   And I save record
   And I take screenshot of Assigning a PM Work Order Task Scenario three

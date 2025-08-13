@@ -1,5 +1,6 @@
 ﻿using GTR_AUTOMATED.Utilities;
 using GTR_Automated_Tests.Pages;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 using Reqnroll;
@@ -10,8 +11,10 @@ using TechTalk.SpecFlow;
 using static System.Net.Mime.MediaTypeNames;
 using BindingAttribute = TechTalk.SpecFlow.BindingAttribute;
 using GivenAttribute = TechTalk.SpecFlow.GivenAttribute;
+using PendingStepException = TechTalk.SpecFlow.PendingStepException;
 using Table = TechTalk.SpecFlow.Table;
 using ThenAttribute = TechTalk.SpecFlow.ThenAttribute;
+using WhenAttribute = TechTalk.SpecFlow.WhenAttribute;
 
 namespace GTR_AUTOMATED.StepDefinitions
 {
@@ -72,14 +75,7 @@ namespace GTR_AUTOMATED.StepDefinitions
                  pom.ClickCreateNewRecord);
         }
 
-        [Given(@"I set CM Work Order Description field to '([^']*)'")]
-        public void SetCMDescription(string text) =>
-          AllureLogger.LogStep($"Set CM WO description to '{text}'",
-               () => SafeActions.EnterText(driver,
-                       By.CssSelector("#mad3161b5-tb2"),
-                       text,
-                       "CM WO description"));
-
+        
         [Given("I choose Select Value from Detail Menu of Location field")]
         public void GivenIChooseSelectValueFromDetailMenuOfLocationField()
         {
@@ -647,8 +643,6 @@ namespace GTR_AUTOMATED.StepDefinitions
         {
             string description = table.Rows[0]["Description"];
             string status = table.Rows[0]["Status"];
-            
-
             pom.FilterTableCMWorkOrder(description, status);
         }
                      
@@ -1261,6 +1255,86 @@ namespace GTR_AUTOMATED.StepDefinitions
             AllureLogger.LogStep("I take screenshot of Automatic work order status transition to WMATL test",
                pom.TakeScreenshotOfAutomaticWorkOrderStatusTransitionToWMATLTest);
         }
+
+
+
+
+
+
+        //MWE Work Order Step Definitions
+
+
+
+
+        [Given("I go to Plans tab")]
+        public void GivenIGoToPlansTab()
+        {
+            AllureLogger.LogStep("I go to Plans tab",
+            pom.GoToPlansTab);
+        }
+
+        [Given("I press add new row under Task for work order section")]
+        public void GivenIPressAddNewRowUnderTaskForWorkOrderSection()
+        {
+            AllureLogger.LogStep("I press add new row under Task for work order section",
+             pom.PressAddNewRowUnderTaskForWorkOrderSection);
+        }
+
+        [Given("I enter CM Task Description:")]
+        public void GivenIEnterCMTaskDescription(Table table)
+        {
+            string TaskDescription = table.Rows[0]["Description"];
+            AllureLogger.LogStep($"I enter Task Description: {TaskDescription}", () =>
+                pom.EnterTaskDescription(TaskDescription));
+        }
+
+        [Given("I open Select Value lookup for Task Requires Tools or Comments field")]
+        public void GivenIOpenSelectValueLookupForTaskRequiresToolsOrCommentsField()
+        {
+            AllureLogger.LogStep("I open Select Value lookup for Task Requires Tools or Comments field",
+            pom.OpenSelectValueLookupForTaskRequiresToolsOrCommentsField);
+        }
+
+        [Given("I select Y")]
+        public void GivenISelectY()
+        {
+            AllureLogger.LogStep("I select Y",
+            pom.SelectY);
+        }
+
+        [Given("I choose Select Value from Detail Menu of Measurement Point field")]
+        public void GivenIChooseSelectValueFromDetailMenuOfMeasurementPointField()
+        {
+            AllureLogger.LogStep("Detail Menu Of Measurement Point Field",
+               pom.DetailMenuOfMeasurementPointField);
+            AllureLogger.LogStep("Select Value Option of Measurement Point",
+                pom.SelectValueOptionofMeasurementPointField);
+        }
+
+        [Given("I open Select Value lookup for Measurement Point field")]
+        public void GivenIOpenSelectValueLookupForMeasurementPointField()
+        {
+            AllureLogger.LogStep("Detail Menu Of Measurement Point Field",
+                 pom.DetailMenuOfMeasurementPointField);
+        }
+                       
+
+        [Given("I filter table Measurement Point:")]
+        public void GivenIFilterTableMeasurementPoint(Table table)
+        {
+            string MeasurementPoint = table.Rows[0]["Measurement Point"];
+            AllureLogger.LogStep($"I filter table Measurement Point: {MeasurementPoint}", () =>
+                pom.FilterTableMeasurementPoint(MeasurementPoint));
+        }
+
+        [Given("I select no. {int} record from Measurement Point table")]
+        public void GivenISelectNo_RecordFromMeasurementPointTable(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} record from Measurement Point table records",
+             () => pom.SelectNoRecordFromMeasurementPointTable(recordNumber));
+        }
+
+       
 
 
     }
