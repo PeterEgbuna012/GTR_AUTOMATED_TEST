@@ -334,10 +334,16 @@ namespace GTR_AUTOMATED.StepDefinitions
         public void GivenIFilterTableReport(Table table)
         {
             string Report = table.Rows[0]["Report"];
-
-
             pom.FilterTableReport(Report);
         }
+
+        [Given("I select no. {int} from Reports table records")]
+        public void GivenISelectNo_FromReportsTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I select no.{recordNumber} record from Report table records",
+             () => pom.SelectNoFromReportsTableRecords(recordNumber));
+        }
+
 
         [Given("I select no. {int} record from Report table record")]
         public void GivenISelectNo_RecordFromReportTableRecord(int recordNumber)

@@ -44,10 +44,12 @@
     <Folder Include="Features\Maintenace &amp; Production\CM\" />
     <Folder Include="Features\Maintenace &amp; Production\EM\" />
     <Folder Include="Features\Maintenace &amp; Production\Faults\" />
+    <Folder Include="Features\Maintenace &amp; Production\Work Order Tracking Reports\" />
     <Folder Include="Features\Materials\Defective Asset Management\" />
     <Folder Include="Features\Materials\Inventory Management\" />
     <Folder Include="Features\Materials\Inventory Reports\" />
     <Folder Include="Features\Materials\Purchasing and Receiving\" />
+    <Folder Include="Features\Work Management\" />
     <Folder Include="Features\Train_Presentation\Toilet Checker\" />
     <Folder Include="Features\Train_Presentation\CleanMaster_ViewCleanMasterWorkOrder\" />
     <Folder Include="Features\Train_Presentation\Sand Master\" />

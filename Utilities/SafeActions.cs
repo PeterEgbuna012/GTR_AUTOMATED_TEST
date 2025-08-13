@@ -63,7 +63,18 @@ namespace GTR_AUTOMATED.Utilities
                 }
             }
         }
-              
+
+          public static void ContextClick(IWebDriver driver, By by, string humanName,
+                               int timeoutSec = 50, int retries = 2) =>
+       Execute(humanName, retries, () =>
+       {
+           var el = Wait(driver, by, timeoutSec, ExpectedConditions.ElementIsVisible);
+
+           Actions actions = new Actions(driver);
+           actions.ContextClick(el).Perform();
+       });
+
+
 
 
         public static void ClearAndEnterText(IWebDriver driver,By locator, string text,string description)

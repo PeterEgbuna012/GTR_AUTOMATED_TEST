@@ -26,7 +26,7 @@ Scenario: Receiving New Consumable Material
 	 And I filter table Report:
       | Report |
       | Goods Receipt Label Report |
-    And I select no. 1 record from Report table record
+    And I select no. 1 from Reports table records
 	And I set (Radio) field to submit report
 	And I wait for page to load
 	And I take screenshot of Receiving New Consumable Material test

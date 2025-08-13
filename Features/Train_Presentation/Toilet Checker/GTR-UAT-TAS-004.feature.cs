@@ -134,12 +134,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 8
  await testRunner.AndAsync("I open application Toilet Checker (MXR)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table394 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table492 = new global::Reqnroll.Table(new string[] {
                             "Toilet Checker"});
-                table394.AddRow(new string[] {
+                table492.AddRow(new string[] {
                             "171728"});
 #line 9
- await testRunner.AndAsync("I filter table Toilet Checker:", ((string)(null)), table394, "And ");
+ await testRunner.AndAsync("I filter table Toilet Checker:", ((string)(null)), table492, "And ");
 #line hidden
 #line 12
  await testRunner.AndAsync("I press button View Audit Log", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");

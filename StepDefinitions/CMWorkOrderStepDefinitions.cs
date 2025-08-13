@@ -72,14 +72,7 @@ namespace GTR_AUTOMATED.StepDefinitions
                  pom.ClickCreateNewRecord);
         }
 
-        [Given(@"I set CM Work Order Description field to '([^']*)'")]
-        public void SetCMDescription(string text) =>
-          AllureLogger.LogStep($"Set CM WO description to '{text}'",
-               () => SafeActions.EnterText(driver,
-                       By.CssSelector("#mad3161b5-tb2"),
-                       text,
-                       "CM WO description"));
-
+        
         [Given("I choose Select Value from Detail Menu of Location field")]
         public void GivenIChooseSelectValueFromDetailMenuOfLocationField()
         {
@@ -647,8 +640,6 @@ namespace GTR_AUTOMATED.StepDefinitions
         {
             string description = table.Rows[0]["Description"];
             string status = table.Rows[0]["Status"];
-            
-
             pom.FilterTableCMWorkOrder(description, status);
         }
                      

@@ -137,12 +137,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
    await testRunner.AndAsync("I select action Run Reports", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table359 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table457 = new global::Reqnroll.Table(new string[] {
                             "Reports"});
-                table359.AddRow(new string[] {
+                table457.AddRow(new string[] {
                             "Firsttime Pickrate Report"});
 #line 10
-   await testRunner.AndAsync("I filter table Reports:", ((string)(null)), table359, "And ");
+   await testRunner.AndAsync("I filter table Reports:", ((string)(null)), table457, "And ");
 #line hidden
 #line 13
    await testRunner.AndAsync("I select no. 1 record from Reports table record", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");

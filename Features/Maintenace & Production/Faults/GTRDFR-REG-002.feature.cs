@@ -141,12 +141,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 12
  await testRunner.AndAsync("I choose Select Value from Detail Menu of Location field", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table187 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table240 = new global::Reqnroll.Table(new string[] {
                             "Location"});
-                table187.AddRow(new string[] {
+                table240.AddRow(new string[] {
                             "387111"});
 #line 13
-    await testRunner.AndAsync("I filter table location:", ((string)(null)), table187, "And ");
+    await testRunner.AndAsync("I filter table location:", ((string)(null)), table240, "And ");
 #line hidden
 #line 16
     await testRunner.AndAsync("I select no. 1 record from Location table records", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -181,21 +181,21 @@ this.ScenarioInitialize(scenarioInfo);
 #line 26
     await testRunner.AndAsync("I select no. 1 record from Reported Priority table", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table188 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table241 = new global::Reqnroll.Table(new string[] {
                             "Headcode"});
-                table188.AddRow(new string[] {
+                table241.AddRow(new string[] {
                             "TAUTO"});
 #line 27
-    await testRunner.AndAsync("I enter following data to Headcode:", ((string)(null)), table188, "And ");
+    await testRunner.AndAsync("I enter following data to Headcode:", ((string)(null)), table241, "And ");
 #line hidden
-                global::Reqnroll.Table table189 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table242 = new global::Reqnroll.Table(new string[] {
                             "Summary",
                             "Details"});
-                table189.AddRow(new string[] {
+                table242.AddRow(new string[] {
                             "Raising a duplicate Fault",
                             "Raising a duplicate Fault Auto Test"});
 #line 30
-    await testRunner.AndAsync("I enter following data:", ((string)(null)), table189, "And ");
+    await testRunner.AndAsync("I enter following data:", ((string)(null)), table242, "And ");
 #line hidden
 #line 33
     await testRunner.AndAsync("I route the workflow", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");

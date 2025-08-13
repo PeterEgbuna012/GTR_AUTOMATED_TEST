@@ -7,7 +7,9 @@ Scenario: 01) Create a CM Work Order
 	Given I sign as maxadmin
 	And I open application Work Order Tracking (BRDA)
 	And I select create new record
-	And I set CM Work Order Description field to 'AUTOT REJECTING CM WO'
+	And I enter work order:
+      | Description |
+      | AUTOT REJECTING CM WO |
 	And I choose Select Value from Detail Menu of Location field
 	And I filter table Location:
       | Location |

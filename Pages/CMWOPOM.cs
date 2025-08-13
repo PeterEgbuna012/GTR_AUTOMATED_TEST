@@ -132,6 +132,7 @@ namespace GTR_Automated_Tests.Pages
          SafeActions.Click(driver,
              By.Id(selector),
              $"I Select No {recordNumber} Record From Location Table Records");
+         Task.Delay(5000).Wait();
      });
 
           public void SelectNoRecordFromWorkTypeTableRecords(int recordNumber) =>
@@ -162,6 +163,7 @@ namespace GTR_Automated_Tests.Pages
               SafeActions.Click(driver,
                  By.Id(selector),
                  $"I Select No {recordNumber} From Location Table Records");
+            Task.Delay(5000).Wait();
         });
 
         public void SelectValueLookupForWorkTypeField() =>
@@ -181,6 +183,7 @@ namespace GTR_Automated_Tests.Pages
           filterField.Clear();
           filterField.SendKeys(WorkType);
           filterField.SendKeys(Keys.Enter);
+          Task.Delay(2000).Wait();
       });
 
         public void SelectNoFromWorkTypeTableRecords(int recordNumber)
@@ -1100,31 +1103,31 @@ namespace GTR_Automated_Tests.Pages
        });
 
 
-         public void FilterTableCMWorkOrder(string description, string status) =>
-     AllureLogger.LogStep($"I filter CM Work Order table with Description = '{description}', Status = '{status}','", () =>
-     {
-         WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+           public void FilterTableCMWorkOrder(string description, string status) =>
+        AllureLogger.LogStep($"I filter CM Work Order table with Description = '{description}', Status = '{status}','", () =>
+        {
+             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
-         // Adjust column indices as per actual table structure:
-         // Description = column 2 → C:2
-         // Status = column 10 → C:10
+             // Adjust column indices as per actual table structure:
+             // Description = column 2 → C:2
+             // Status = column 10 → C:10
 
-         By descriptionFilterLocator = By.CssSelector("#m6a7dfd2f_tfrow_\\[C\\:2\\]_txt-tb");
-         By statusFilterLocator = By.CssSelector("#m6a7dfd2f_tfrow_\\[C\\:10\\]_txt-tb");
+             By descriptionFilterLocator = By.CssSelector("#m6a7dfd2f_tfrow_\\[C\\:2\\]_txt-tb");
+             By statusFilterLocator = By.CssSelector("#m6a7dfd2f_tfrow_\\[C\\:10\\]_txt-tb");
 
-         IWebElement descriptionFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(descriptionFilterLocator));
-         descriptionFilter.Click();
-         descriptionFilter.Clear();
-         descriptionFilter.SendKeys(description);
+             IWebElement descriptionFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(descriptionFilterLocator));
+             descriptionFilter.Click();
+             descriptionFilter.Clear();
+             descriptionFilter.SendKeys(description);
 
-         IWebElement statusFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(statusFilterLocator));
-         statusFilter.Click();
-         statusFilter.Clear();
-         statusFilter.SendKeys(status);
-
-         // Press Enter on the last filter field to trigger filtering
-         statusFilter.SendKeys(Keys.Enter);
-     });
+             IWebElement statusFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(statusFilterLocator));
+             statusFilter.Click();
+             statusFilter.Clear();
+             statusFilter.SendKeys(status);
+             // Press Enter on the last filter field to trigger filtering
+             statusFilter.SendKeys(Keys.Enter);
+             Task.Delay(5000).Wait();
+        });
 
 
 
