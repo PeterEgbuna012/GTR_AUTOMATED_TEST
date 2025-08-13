@@ -135,16 +135,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
  await testRunner.AndAsync("I open application Receiving (Tr) from Fav Menu", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table376 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table422 = new global::Reqnroll.Table(new string[] {
                             "PO",
                             "PO Status",
                             "Receipts"});
-                table376.AddRow(new string[] {
+                table422.AddRow(new string[] {
                             "HN",
                             "=APPR",
                             "PARTIAL"});
 #line 10
- await testRunner.AndAsync("I filter Receiving (Tr):", ((string)(null)), table376, "And ");
+ await testRunner.AndAsync("I filter Receiving (Tr):", ((string)(null)), table422, "And ");
 #line hidden
 #line 13
     await testRunner.AndAsync("I select no. 4 record from PO Item table record", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -152,14 +152,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 14
  await testRunner.AndAsync("I select Ordered Items button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table377 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table423 = new global::Reqnroll.Table(new string[] {
                             "Delivery Note",
                             "Remarks Note"});
-                table377.AddRow(new string[] {
+                table423.AddRow(new string[] {
                             "TEST AUTO",
                             "Receiving New Rotating Material Auto Test"});
 #line 15
- await testRunner.AndAsync("I enter  delivery note:", ((string)(null)), table377, "And ");
+ await testRunner.AndAsync("I enter  delivery note:", ((string)(null)), table423, "And ");
 #line hidden
 #line 18
  await testRunner.AndAsync("I select no. 1 PO Item to receive table records", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");

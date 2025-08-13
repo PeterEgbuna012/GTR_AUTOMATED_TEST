@@ -1,6 +1,7 @@
-using GTR_AUTOMATED.Utilities;
+﻿using GTR_AUTOMATED.Utilities;
 using GTR_Automated_Tests.Pages;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using Reqnroll;
 
@@ -406,7 +407,7 @@ namespace GTR_AUTOMATED.Pages
                 var refreshButton = By.CssSelector("#m6a7dfd2f-img5");
                 SafeActions.Click(driver, refreshButton, "Clicking refresh button on table");
 
-                // Wait for the table to reload � use a reliable condition
+                // Wait for the table to reload – use a reliable condition
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
                 wait.Until(d =>
                 {
@@ -1306,7 +1307,7 @@ namespace GTR_AUTOMATED.Pages
                 var refreshButton = By.CssSelector("#m6a7dfd2f-img5"); 
                 SafeActions.Click(driver, refreshButton, "Clicking refresh button on Job Plans table");
 
-                // Wait for the table to reload � use a reliable condition
+                // Wait for the table to reload – use a reliable condition
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
                 wait.Until(d =>
                 {
@@ -1765,7 +1766,7 @@ namespace GTR_AUTOMATED.Pages
                 var refreshButton = By.CssSelector("#m6a7dfd2f-img5");
                 SafeActions.Click(driver, refreshButton, "Clicking refresh button on Work Order Template table");
 
-                // Wait for the table to reload � use a reliable condition
+                // Wait for the table to reload – use a reliable condition
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
                 wait.Until(d =>
                 {
@@ -1839,6 +1840,1595 @@ namespace GTR_AUTOMATED.Pages
       });
 
 
+
+
+
+        // Creating a new Training Course Work Order POM Steps Definitions
+
+
+
+
+
+          public void EnterWorkOrder(string Description) =>
+         AllureLogger.LogStep($"I enter work order'{Description}'", () =>
+         {
+
+             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+             By filterFieldLocator = By.CssSelector("#mad3161b5-tb2");
+             IWebElement filterField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(filterFieldLocator));
+
+             filterField.Click();
+             filterField.Clear();
+             filterField.SendKeys(Description);
+          
+         });
+
+         public void SetWorkTypeField(string WorkType) =>
+         AllureLogger.LogStep($"I set Work Type field'{WorkType}'", () =>
+         {
+
+             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+             By filterFieldLocator = By.CssSelector("#me2096203-tb");
+             IWebElement filterField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(filterFieldLocator));
+
+             filterField.Click();
+             filterField.Clear();
+             filterField.SendKeys(WorkType);
+          
+         });
+
+         public void VerifyWorkOrderStatusWAITREV() =>
+        AllureLogger.LogStep("I verify work order status WAIT-REV", () =>
+        {
+             try
+             {
+
+                Task.Delay(10000).Wait();
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
+
+                  // Wait for the status field to be visible
+                  var statusField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#md3801d08-tb")));
+
+                  // Get the actual value of the field
+                  string actualStatus = statusField.GetAttribute("value")?.Trim();
+
+                // Verify the status is exactly "WAIT-REV"
+                if (!string.Equals(actualStatus, "WAIT-REV", StringComparison.OrdinalIgnoreCase))
+                  {
+                      throw new Exception($"Failure: Status is not WAIT-REV. Actual value: '{actualStatus ?? "null"}'");
+                  }
+
+                      Console.WriteLine("Success: Status is WAIT-REV.");
+                 }
+                 catch (NoSuchElementException ex)
+                 {
+                     Console.WriteLine("Error: Status element not found - " + ex.Message);
+                     throw;
+                 }
+                 catch (Exception ex)
+                 {
+                     Console.WriteLine("Error: " + ex.Message);
+                     throw;
+                 }
+        });
+
+
+         public void TakeScreenshotOfCreatingANewTrainingCourseWorkOrderTest() =>
+      AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-005B", () =>
+      {
+          try
+          {
+              Task.Delay(5000).Wait();
+              var takescreenshot = new TakeScreenShotPOM(driver);
+              string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-005B.png";
+
+              takescreenshot.TakeScreenshot(driver, successPath);
+          }
+          catch (Exception ex)
+          {
+              Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+              // Attempt fallback screenshot on failure
+              var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-005B_Failure.png";
+              var takescreenshot = new TakeScreenShotPOM(driver);
+
+              takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+              // Optional: Rethrow if test should fail
+              throw new Exception("Test failed while taking screenshot.", ex);
+          }
+      });
+
+
+
+
+        // Scheduling a Training Course (in Graphical Scheduling) POM Steps Definitions
+
+
+
+
+
+
+        public void PlanningAndSchedulingMenuButton() =>
+         AllureLogger.LogStep("Open Planning And Scheduling Menu Button", () =>
+             SafeActions.Click(driver, By.Id("menu0_SCHEDULER_MODULE_a_tnode"),
+                               "Planning And Scheduling Menu Button"));
+
+        public void GraphicalSchedulingButton() =>
+            AllureLogger.LogStep("Launch Graphical Scheduling", () =>
+                SafeActions.Click(driver,
+                    By.Id("menu0_SCHEDULER_MODULE_sub_changeapp_SCHEDACM_a_tnode"),
+                    "Launch Graphical Scheduling"));
+
+
+        public void SelectCreateNewSchedule() =>
+       AllureLogger.LogStep("I select create new schedule", () =>
+           SafeActions.Click(driver,
+               By.Id("toolactions_INSERT-tbb_image"),
+               "I select create new schedule"));
+
+
+         public void EnterScheduleID(string ID, string Description) =>
+        AllureLogger.LogStep($"I enter Work Order Template = '{ID}', Description = '{Description}'", () =>
+        {
+           WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+
+            // Adjust column indexes if needed
+            By IDLocator = By.CssSelector("#mad3161b5-tb");
+            By DescriptionLocator = By.CssSelector("#mad3161b5-tb2");
+           
+            // Description filter
+            IWebElement IDFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(IDLocator));
+            IDFilter.Click();
+            IDFilter.Clear();
+            IDFilter.SendKeys(ID);
+
+            // Status filter
+            IWebElement DescriptionFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(DescriptionLocator));
+            DescriptionFilter.Click();
+            DescriptionFilter.Clear();
+            DescriptionFilter.SendKeys(Description);
+            
+        });
+
+        public void DetailMenuOfcalendar() =>
+          AllureLogger.LogStep("Detail Menu Of calendar", () =>
+              SafeActions.Click(driver, By.CssSelector("#m3438300f-img"),
+                                "Detail Menu Of calendar Field"));
+
+        public void SelectValueOptionOfcalendar() =>
+           AllureLogger.LogStep("Select Value Option of calendar", () =>
+               SafeActions.Click(driver, By.Id("CALENDAR_calendar0_a_tnode"),
+                                 "Select Value Option of calendar"));
+
+
+        public void SelectGTRBASE() =>
+       AllureLogger.LogStep("I select GTRBASE", () =>
+           SafeActions.Click(driver,
+               By.Id("lookup_page1_tdrow_[C:0]_ttxt-lb[R:0]"),
+               "I select GTRBASE"));
+
+         public void SelectCopyQueryButtonUnderWorkQueriesSection() =>
+       AllureLogger.LogStep("I select Copy Query button under Work Queries section", () =>
+           SafeActions.Click(driver,
+               By.CssSelector("#m7ad62980_bg_button_selectquery-pb"),
+               "I select Copy Query button under Work Queries section"));
+
+
+
+         public void FilterTableQuery(string Query) =>
+         AllureLogger.LogStep($"I filter table Query'{Query}'", () =>
+         {
+             By filterFieldLocator = By.CssSelector("#m4577f3eb_tfrow_\\[C\\:2\\]_txt-tb");
+
+             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+             IWebElement filterField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(filterFieldLocator));
+
+             filterField.Click();
+             filterField.Clear();
+             filterField.SendKeys(Query);
+             filterField.SendKeys(Keys.Enter);
+
+
+         });
+
+
+        public void SelectNoFromQueryTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I Select No {recordNumber} Record From Query Table Records", () =>
+            {
+                // Assuming your selector needs to change row index [R:x] with recordNumber - 1 (zero-based)
+                int zeroBasedIndex = recordNumber - 1;
+
+                // Build dynamic Id selector by replacing the row index [R:x]
+                string selector = $"m4577f3eb_tdrow_[C:0]_tbselrow-ti[R:{zeroBasedIndex}]_img";
+
+                SafeActions.Click(driver, By.Id(selector),
+                    $"I Select No {recordNumber} Record From Query Table Records");
+                Task.Delay(5000).Wait();
+            });
+        }
+
+         public void PressDialogOkButtonOfCopyQuery() =>
+       AllureLogger.LogStep("I press dialog ok button of copy Query", () =>
+           SafeActions.Click(driver,
+               By.CssSelector("#m6a1295ef-pb"),
+               "I press dialog ok button of copy Query"));
+
+           public void WaitForQueryToLoad() =>
+        AllureLogger.LogStep("I wait for Query to load", () =>
+        {
+            Task.Delay(350000).Wait();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(50));
+
+             // Define the ID of the element that indicates the query page is loaded
+             string selectorId = "m397b0593-tabs_middle";
+
+            // Wait until the element is clickable
+             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id(selectorId)));
+            Task.Delay(20000).Wait();
+        });
+
+
+         public void GoToTabGraphicalView() =>
+       AllureLogger.LogStep("I go to tab Graphical View", () =>
+           SafeActions.Click(driver,
+               By.Id("m71dde5a3-tab_anchor"),
+               "I go to tab Graphical View"));
+
+
+        public void WaitForGraphicalPageToLoad() =>
+       AllureLogger.LogStep("I wait for Query to load", () =>
+       {
+           Task.Delay(250000).Wait();
+           WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(50));
+
+           // Define the ID of the element that indicates the query page is loaded
+           string selectorId = "md86fe08f_ns_menu_COMMIT_OPTION_a_tnode";
+
+           // Wait until the element is clickable
+           wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id(selectorId)));
+           Task.Delay(5000).Wait();
+       });
+
+
+
+          public void SelectCommitChanges() =>
+       AllureLogger.LogStep("I select Commit Changes", () =>
+           SafeActions.Click(driver,
+               By.Id("md86fe08f_ns_menu_COMMIT_OPTION_a_tnode"),
+               "I select Commit Changes"));
+
+          public void ClickYesDialogButton() =>
+       AllureLogger.LogStep("I click yes dialog button", () =>
+           SafeActions.Click(driver,
+               By.CssSelector("#me1720906-pb"),
+               "I click yes dialog button"));
+
+          public void PressOKDialogButtonOfSystemMessage() =>
+       AllureLogger.LogStep("I press OK dialog button of system message", () =>
+           SafeActions.Click(driver,
+               By.CssSelector("#m88dbf6ce-pb"),
+               "I press OK dialog button of system message"));
+
+          public void ChangeStatus() =>
+       AllureLogger.LogStep("I select Change Status", () =>
+           SafeActions.Click(driver,
+               By.Id("md86fe08f_ns_menu_STATUSMAIN_OPTION_a_tnode"),
+               "I select Change Status"));
+
+        public void DropDownMenuOption() =>
+       AllureLogger.LogStep("Drop Down Menu Option", () =>
+           SafeActions.Click(driver,
+               By.CssSelector("#m392ddbaa-img"),
+               "Drop Down Menu Option"));
+
+         public void SelectApproved() =>
+       AllureLogger.LogStep("I select Approved", () =>
+           SafeActions.Click(driver,
+               By.Id("menu0_APPR_OPTION_a_tnode"),
+               "I select Approved"));
+
+
+         public void SelectOk() =>
+       AllureLogger.LogStep("I click yes dialog button", () =>
+           SafeActions.Click(driver,
+               By.CssSelector("#mce78731e-pb"),
+               "I click yes dialog button"));
+
+         public void GoToTabSchedule() =>
+       AllureLogger.LogStep("I go to tab Schedule", () =>
+           SafeActions.Click(driver,
+               By.Id("mbf28cd64-tab_anchor"),
+               "I go to tab Schedule"));
+
+
+         public void VerifyStatusAPPROVED() =>
+        AllureLogger.LogStep("I verify template status APPROVED", () =>
+        {
+             try
+             {
+
+                Task.Delay(10000).Wait();
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
+
+                  // Wait for the status field to be visible
+                  var statusField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#ma3558a76-tb")));
+
+                  // Get the actual value of the field
+                  string actualStatus = statusField.GetAttribute("value")?.Trim();
+
+                // Verify the status is exactly "APPR"
+                if (!string.Equals(actualStatus, "APPR", StringComparison.OrdinalIgnoreCase))
+                  {
+                      throw new Exception($"Failure: Status is not APPR. Actual value: '{actualStatus ?? "null"}'");
+                  }
+
+                      Console.WriteLine("Success: Status is APPR.");
+                 }
+                 catch (NoSuchElementException ex)
+                 {
+                     Console.WriteLine("Error: Status element not found - " + ex.Message);
+                     throw;
+                 }
+                 catch (Exception ex)
+                 {
+                     Console.WriteLine("Error: " + ex.Message);
+                     throw;
+                 }
+        });
+
+
+            public void TakeScreenshotOfSchedulingATrainingCourseInGraphicalSchedulingTestScenarioOne() =>
+        AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-006A", () =>
+        {
+            try
+            {
+                Task.Delay(5000).Wait();
+                var takescreenshot = new TakeScreenShotPOM(driver);
+                string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-006A.png";
+
+               takescreenshot.TakeScreenshot(driver, successPath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+               // Attempt fallback screenshot on failure
+                var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-006A_Failure.png";
+                var takescreenshot = new TakeScreenShotPOM(driver);
+
+                takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+              // Optional: Rethrow if test should fail
+              throw new Exception("Test failed while taking screenshot.", ex);
+            }
+       });
+
+
+
+         public void FilterTableGraphicalScheduling(string GraphicalScheduling) =>
+       AllureLogger.LogStep($"I filter Job Plan'{GraphicalScheduling}'", () =>
+       {
+          By filterFieldLocator = By.CssSelector("#m6a7dfd2f_tfrow_\\[C\\:0\\]_txt-tb");
+
+          WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+          IWebElement filterField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(filterFieldLocator));
+
+          filterField.Click();
+          filterField.Clear();
+          filterField.SendKeys(GraphicalScheduling);
+          filterField.SendKeys(Keys.Enter);
+           Task.Delay(5000).Wait();
+       });
+
+
+        public void SelectNoRecordFromGraphicalSchedulingTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I Select No {recordNumber} Record From  Graphical Scheduling Table Records", () =>
+            {
+                // Assuming your selector needs to change row index [R:x] with recordNumber - 1 (zero-based)
+                int zeroBasedIndex = recordNumber - 1;
+
+                // Build dynamic Id selector by replacing the row index [R:x]
+                string selector = $"m6a7dfd2f_tdrow_[C:0]_ttxt-lb[R:{zeroBasedIndex}]";
+
+                SafeActions.Click(driver, By.Id(selector),
+                    $"I Select No {recordNumber} Record From  Graphical Scheduling Table Records");
+                Task.Delay(5000).Wait();
+            });
+        }
+
+         public void SelectDeleteGraphicalSchedulingRecord() =>
+       AllureLogger.LogStep("I select delete Graphical Scheduling record", () =>
+           SafeActions.Click(driver,
+               By.Id("md86fe08f_ns_menu_DELETE_OPTION_a_tnode"),
+               "I select delete Graphical Scheduling record"));
+
+
+        public void VerifyGraphicalSchedulingTableHasNoRecords()
+        {
+            AllureLogger.LogStep("I verify Graphical Scheduling table has no records", () =>
+            {
+                // Click the refresh button
+                var refreshButton = By.CssSelector("#m6a7dfd2f-img5");
+                SafeActions.Click(driver, refreshButton, "Clicking refresh button on Work Order Template table");
+
+                // Wait for the table to reload – use a reliable condition
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+                wait.Until(d =>
+                {
+                    var rows = d.FindElements(By.CssSelector("#m6a7dfd2f_tbod_tempty_tcell_statictext-lb"));
+                    return rows.Count == 0 || rows.All(row => row.Text.Contains("No records found") || string.IsNullOrWhiteSpace(row.Text));
+                });
+
+                // Verify that no records exist in the table
+                var tableRows = driver.FindElements(By.CssSelector("#m6a7dfd2f_tbod_tempty_tcell_statictext-lb"));
+                int rowCount = tableRows.Count;
+
+                // If table shows a "no records" placeholder row, consider it as empty
+                if (rowCount > 0 && tableRows.Any(row => !row.Text.Contains("No records found") && !string.IsNullOrWhiteSpace(row.Text)))
+                {
+                    throw new Exception($"Expected 0 records in the table, but found {rowCount}.");
+                }
+            });
+        }
+
+
+        public void TakeScreenshotOfSchedulingATrainingCourseInGraphicalSchedulingTestScenariotwo() =>
+        AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-006ASC02", () =>
+        {
+            try
+            {
+                Task.Delay(5000).Wait();
+                var takescreenshot = new TakeScreenShotPOM(driver);
+                string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-006ASC02.png";
+
+                takescreenshot.TakeScreenshot(driver, successPath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+                // Attempt fallback screenshot on failure
+                var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-006ASC02_Failure.png";
+                var takescreenshot = new TakeScreenShotPOM(driver);
+
+                takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+                // Optional: Rethrow if test should fail
+                throw new Exception("Test failed while taking screenshot.", ex);
+            }
+        });
+
+
+
+
+
+
+        // Scheduling a Training Course (in Work Order Tracking) POM Steps Definitions
+
+
+
+
+
+        public void TakeScreenshotOfSchedulingATrainingCourseInWorkOrderTrackingTestScenarioOne() =>
+       AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-006BSC01", () =>
+       {
+           try
+           {
+               Task.Delay(5000).Wait();
+               var takescreenshot = new TakeScreenShotPOM(driver);
+               string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-006BSC01.png";
+
+               takescreenshot.TakeScreenshot(driver, successPath);
+           }
+           catch (Exception ex)
+           {
+               Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+               // Attempt fallback screenshot on failure
+               var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-006BSC01_Failure.png";
+               var takescreenshot = new TakeScreenShotPOM(driver);
+
+               takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+               // Optional: Rethrow if test should fail
+               throw new Exception("Test failed while taking screenshot.", ex);
+           }
+       });
+
+
+        public void OpenApplicationCMSCourseWorkOrderMXR() =>
+            AllureLogger.LogStep("Launch CMS Course Work Order (MXR)", () =>
+                SafeActions.Click(driver,
+                    By.Id("menu0_WO_MODULE_sub_changeapp_MXRCMSWO_a_tnode"),
+                    "Launch CMS Course Work Order (MXR)"));
+
+
+         public void FilterTableCMSCourseWorkOrder(string Description) =>
+       AllureLogger.LogStep($"I filter table CMS Course Work Order'{Description}'", () =>
+       {
+          By filterFieldLocator = By.CssSelector("#m6a7dfd2f_tfrow_\\[C\\:3\\]_txt-tb");
+
+          WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+          IWebElement filterField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(filterFieldLocator));
+
+          filterField.Click();
+          filterField.Clear();
+          filterField.SendKeys(Description);
+          filterField.SendKeys(Keys.Enter);
+           Task.Delay(3000).Wait();
+       });
+
+        public void SelectNoFromCMSCourseWorkOrderTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I Select No {recordNumber} Record From CMS Course Work Order Table Records", () =>
+            {
+                // Assuming your selector needs to change row index [R:x] with recordNumber - 1 (zero-based)
+                int zeroBasedIndex = recordNumber - 1;
+
+                // Build dynamic Id selector by replacing the row index [R:x]
+                string selector = $"m6a7dfd2f_tdrow_[C:1]_ttxt-lb[R:{zeroBasedIndex}]";
+
+                SafeActions.Click(driver, By.Id(selector),
+                    $"I Select No {recordNumber} Record From CMS Course Work Order Table Records");
+                Task.Delay(5000).Wait();
+            });
+        }
+
+
+            public void SetScheduledStart() =>
+         AllureLogger.LogStep("I Set Scheduled Start Date", () =>
+         {
+                  
+             // Date format expected by the input. Adjust if the control needs a different one.
+             string today = DateTime.Today.AddDays(-5).ToString("dd-MM-yyyy");
+
+             var locator = By.CssSelector("#m5401b8f3-tb");
+              var dateBox = driver.FindElement(locator);
+
+              dateBox.Clear();
+              dateBox.SendKeys(today);
+              dateBox.SendKeys(Keys.Enter);          
+         });
+
+        public void SetScheduledFinishDate() =>
+         AllureLogger.LogStep("I Scheduled Finish date", () =>
+         {
+
+             // Date format expected by the input. Adjust if the control needs a different one.
+             string today = DateTime.Today.AddDays(+5).ToString("dd-MM-yyyy");
+
+             var locator = By.CssSelector("#m7f6d89d8-tb");
+             var dateBox = driver.FindElement(locator);
+
+             dateBox.Clear();
+             dateBox.SendKeys(today);
+             dateBox.SendKeys(Keys.Enter);
+         });
+
+
+           public void VerifyGeneratedWorkOrderNumber() =>
+        AllureLogger.LogStep("I verify Scheduled Start", () =>
+        {
+           try
+           {
+                // Wait 5 seconds for the page or element to load
+                Task.Delay(5000).Wait();
+
+                // Find the Related Work Order element by CSS selector
+                var relatedWorkOrder = driver.FindElement(By.CssSelector("#m7f6d89d8-tb"));
+
+                // Get the 'value' attribute of the element
+                string ScheduledStart = relatedWorkOrder.GetAttribute("value");
+
+                // Check if the Scheduled Start is null or empty
+                if (string.IsNullOrEmpty(ScheduledStart))
+                {
+                    throw new Exception("Failure:Scheduled Start is empty or null.");
+                }
+
+                // Log success with the Scheduled Start
+                Console.WriteLine("Success: Scheduled Start is " + ScheduledStart);
+                }
+                catch (NoSuchElementException ex)
+                {
+                    Console.WriteLine("Error:Scheduled Start element not found - " + ex.Message);
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                     Console.WriteLine("Error: " + ex.Message);
+                     throw;
+                }
+        });
+
+
+         public void TakeScreenshotOfSchedulingATrainingCourseInWorkOrderTrackingTestScenarioTwo() =>
+       AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-006BSC02", () =>
+       {
+           try
+           {
+               Task.Delay(5000).Wait();
+               var takescreenshot = new TakeScreenShotPOM(driver);
+               string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-006BSC02.png";
+
+               takescreenshot.TakeScreenshot(driver, successPath);
+           }
+           catch (Exception ex)
+           {
+               Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+               // Attempt fallback screenshot on failure
+               var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-006BSC02_Failure.png";
+               var takescreenshot = new TakeScreenShotPOM(driver);
+
+               takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+               // Optional: Rethrow if test should fail
+               throw new Exception("Test failed while taking screenshot.", ex);
+           }
+       });
+
+
+
+
+
+
+        // Allocating a Trainer & Classroom to a Training Course (in Graphical Assignment) POM Steps Definitions
+
+
+
+
+            public void EnterLongDescription(string longDescription) =>
+           AllureLogger.LogStep($"I enter long description '{longDescription}'", () =>
+           {
+               WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+
+               // 1. Click the long description icon (replace selector as needed)
+               By iconLocator = By.CssSelector("#mad3161b5-img2");
+               IWebElement iconElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(iconLocator));
+               iconElement.Click();
+
+               // 2. Wait for the iframe to appear and switch to it
+               wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("ma6499a9c-rte_iframe")));
+
+               // 3. Wait for the textarea or input inside the iframe to be ready
+               By descriptionFieldLocator = By.XPath("//*[@id='dijitEditorBody']");
+               IWebElement descriptionField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(descriptionFieldLocator));
+        
+               descriptionField.Clear();
+               descriptionField.SendKeys(longDescription);
+
+               // 4. Switch back to the main document
+                driver.SwitchTo().DefaultContent();
+           });
+
+
+           public void SelectTheOkButton() =>
+         AllureLogger.LogStep("I select the Ok button", () =>
+             SafeActions.Click(driver,
+               By.CssSelector("#m74031266-pb"),
+               "I select the Ok button"));
+
+
+
+           public void SelectListViewButton() =>
+         AllureLogger.LogStep("I select list view button", () =>
+             SafeActions.Click(driver,
+               By.Id("m397b0593-tabs_middle"),
+               "I select list view button"));
+
+         public void FilterGraphicalSchedulingTable(string ID) =>
+         AllureLogger.LogStep($"I filter Graphical Scheduling'{ID}'", () =>
+         {
+             By filterFieldLocator = By.CssSelector("#m6a7dfd2f_tfrow_\\[C\\:1\\]_txt-tb");
+
+             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+             IWebElement filterField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(filterFieldLocator));
+
+             filterField.Click();
+             filterField.Clear();
+             filterField.SendKeys(ID);
+             filterField.SendKeys(Keys.Enter);
+             Task.Delay(3000).Wait();
+         });
+
+
+
+        public void SelectNoFromGraphicalSchedulingTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I Select No {recordNumber} Record From Graphical Scheduling Table Records", () =>
+            {
+                // Assuming your selector needs to change row index [R:x] with recordNumber - 1 (zero-based)
+                int zeroBasedIndex = recordNumber - 1;
+
+                // Build dynamic Id selector by replacing the row index [R:x]
+                string selector = $"m6a7dfd2f_tdrow_[C:1]_ttxt-lb[R:{zeroBasedIndex}]";
+
+                SafeActions.Click(driver, By.Id(selector),
+                    $"I Select No {recordNumber} Record From Graphical Scheduling Table Records");
+                Task.Delay(5000).Wait();
+            });
+        }
+
+         public void TakeScreenshotOfAllocatingATrainerClassroomToATrainingCourseInGraphicalAssignmentTestScenarioOne() =>
+       AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-007ASC01", () =>
+       {
+           try
+           {
+               Task.Delay(5000).Wait();
+               var takescreenshot = new TakeScreenShotPOM(driver);
+               string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-007ASC01.png";
+
+               takescreenshot.TakeScreenshot(driver, successPath);
+           }
+           catch (Exception ex)
+           {
+               Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+               // Attempt fallback screenshot on failure
+               var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-007ASC01_Failure.png";
+               var takescreenshot = new TakeScreenShotPOM(driver);
+
+               takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+               // Optional: Rethrow if test should fail
+               throw new Exception("Test failed while taking screenshot.", ex);
+           }
+       });
+
+         public void TakeScreenshotOfAllocatingATrainerClassroomToATrainingCourseInGraphicalAssignmentTestScenariotwo() =>
+       AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-007ASC02", () =>
+       {
+           try
+           {
+               Task.Delay(5000).Wait();
+               var takescreenshot = new TakeScreenShotPOM(driver);
+               string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-007ASC02.png";
+
+               takescreenshot.TakeScreenshot(driver, successPath);
+           }
+           catch (Exception ex)
+           {
+               Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+               // Attempt fallback screenshot on failure
+               var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-007ASC02_Failure.png";
+               var takescreenshot = new TakeScreenShotPOM(driver);
+
+               takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+               // Optional: Rethrow if test should fail
+               throw new Exception("Test failed while taking screenshot.", ex);
+           }
+       });
+
+
+
+
+
+
+
+        // Allocating a Trainer & Classroom to a Training Course (in Work Order Tracking) POM Steps Definitions
+
+
+
+
+
+
+
+          public void TakeScreenshotOfAllocatingATrainerClassroomToATrainingCourseInWorkOrderTrackingTestScenarioOne() =>
+         AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-007BSC01", () =>
+         {
+             try
+             {
+                 Task.Delay(5000).Wait();
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+                 string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-007BSC01.png";
+
+                 takescreenshot.TakeScreenshot(driver, successPath);
+             }
+             catch (Exception ex)
+             {
+                Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+                 // Attempt fallback screenshot on failure
+                 var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-007BSC01_Failure.png";
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+
+                 takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+                 // Optional: Rethrow if test should fail
+                 throw new Exception("Test failed while taking screenshot.", ex);
+             }
+         });
+
+        public void FilterWorkOrder(string description, string WorkType) =>
+         AllureLogger.LogStep($"I filter  work Order table with Description = '{description}', WorkType = '{WorkType}'", () =>
+         {
+             
+             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+             By descriptionFilterLocator = By.CssSelector("#m6a7dfd2f_tfrow_\\[C\\:2\\]_txt-tb");
+             By WorkTypeFilterLocator = By.CssSelector("#m6a7dfd2f_tfrow_\\[C\\:4\\]_txt-tb");
+
+             
+             IWebElement descriptionFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(descriptionFilterLocator));
+             descriptionFilter.Click();
+             descriptionFilter.Clear();
+             descriptionFilter.SendKeys(description);
+                         
+             IWebElement WorkTypeFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(WorkTypeFilterLocator));
+             WorkTypeFilter.Click();
+             WorkTypeFilter.Clear();
+             WorkTypeFilter.SendKeys(WorkType);
+             WorkTypeFilter.SendKeys(Keys.Enter);
+             Task.Delay(3000).Wait();
+         });
+
+        public void SelectNoRecordFromWorkOrderTableRecords(int recordNumber)
+        {
+            AllureLogger.LogStep($"I Select No {recordNumber} Record From Work Order Table Records", () =>
+            {
+                // Assuming your selector needs to change row index [R:x] with recordNumber - 1 (zero-based)
+                int zeroBasedIndex = recordNumber - 1;
+
+                // Build dynamic Id selector by replacing the row index [R:x]
+                string selector = $"m6a7dfd2f_tdrow_[C:1]_ttxt-lb[R:{zeroBasedIndex}]";
+
+                SafeActions.Click(driver, By.Id(selector),
+                    $"I Select No {recordNumber} Record From Work Order Table Records");
+                Task.Delay(3000).Wait();
+            });
+
+        }
+
+
+        public void RescheduleStartDateTomorrowsDate() =>
+         AllureLogger.LogStep("I Set Scheduled Start Date", () =>
+         {
+                  
+             // Date format expected by the input. Adjust if the control needs a different one.
+             string today = DateTime.Today.AddDays(-8).ToString("dd-MM-yyyy");
+
+             var locator = By.CssSelector("#m8b12679c-tb");
+              var dateBox = driver.FindElement(locator);
+
+              dateBox.Clear();
+              dateBox.SendKeys(today);
+              dateBox.SendKeys(Keys.Enter);          
+         });
+
+
+        public void TakeScreenshotOfAllocatingATrainerClassroomToATrainingCourseInWorkOrderTrackingTestScenariotwo() =>
+         AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-007BSC02", () =>
+         {
+             try
+             {
+                 Task.Delay(5000).Wait();
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+                 string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-007BSC02.png";
+
+                 takescreenshot.TakeScreenshot(driver, successPath);
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+                 // Attempt fallback screenshot on failure
+                 var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-007BSC02_Failure.png";
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+
+                 takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+                 // Optional: Rethrow if test should fail
+                 throw new Exception("Test failed while taking screenshot.", ex);
+             }
+         });
+
+
+
+
+
+
+        // Allocating a Trainer, Classroom & Trainees to a Training Course (in Graphical Assignment) POM Steps Definitions
+
+
+
+
+        public void GraphicalAssignment() =>
+           AllureLogger.LogStep("Launch Graphical Assignment", () =>
+               SafeActions.Click(driver,
+                   By.Id("menu0_SCHEDULER_MODULE_sub_changeapp_RLASSIGN_a_tnode"),
+                   "Launch Graphical Assignment"));
+
+
+         public void EnterAssignment(string ID, string Description) =>
+        AllureLogger.LogStep($"I enter Assignment = '{ID}', Description = '{Description}'", () =>
+        {
+           WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+
+            // Adjust column indexes if needed
+            By IDLocator = By.CssSelector("#m5311c821-tb");
+            By DescriptionLocator = By.CssSelector("#m5311c821-tb2");
+           
+            // Description filter
+            IWebElement IDFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(IDLocator));
+            IDFilter.Click();
+            IDFilter.Clear();
+            IDFilter.SendKeys(ID);
+
+            // Status filter
+            IWebElement DescriptionFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(DescriptionLocator));
+            DescriptionFilter.Click();
+            DescriptionFilter.Clear();
+            DescriptionFilter.SendKeys(Description);
+            
+        });
+
+                
+         public void OpenSelectValueLookupOfShiftField() =>
+         AllureLogger.LogStep("I open Select Value lookup of Shift field", () =>
+             SafeActions.Click(driver,
+               By.CssSelector("#m433f0099-img"),
+               "I open Select Value lookup of Shift field"));
+
+
+         public void SelectNoFromShiftTableRecords(int recordNumber)
+         {
+            AllureLogger.LogStep($"I Select No {recordNumber} Record From Shift Table Records", () =>
+            {
+                // Assuming your selector needs to change row index [R:x] with recordNumber - 1 (zero-based)
+                int zeroBasedIndex = recordNumber - 1;
+
+                // Build dynamic Id selector by replacing the row index [R:x]
+                string selector = $"m8da9ac55_tdrow_[C:0]_tbselrow-ti[R:{zeroBasedIndex}]_img";
+
+                SafeActions.Click(driver, By.Id(selector),
+                    $"I Select No {recordNumber} Record From Shift Table Records");
+                Task.Delay(3000).Wait();
+            });
+
+         }
+
+         public void FilterGraphicalScheduling(string Description) =>
+         AllureLogger.LogStep($"I filter Graphical Scheduling'{Description}'", () =>
+         {
+             By filterFieldLocator = By.CssSelector("#m6a7dfd2f_tfrow_\\[C\\:1\\]_txt-tb");
+
+             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+             IWebElement filterField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(filterFieldLocator));
+
+             filterField.Click();
+             filterField.Clear();
+             filterField.SendKeys(Description);
+             filterField.SendKeys(Keys.Enter);
+             Task.Delay(5000).Wait();
+         });
+
+         public void SelectNoRecordFromGraphicalTableRecords(int recordNumber)
+         {
+            AllureLogger.LogStep($"I Select No {recordNumber} Record From Graphical Table Records", () =>
+            {
+                // Assuming your selector needs to change row index [R:x] with recordNumber - 1 (zero-based)
+                int zeroBasedIndex = recordNumber - 1;
+
+                // Build dynamic Id selector by replacing the row index [R:x]
+                string selector = $"m6a7dfd2f_tdrow_[C:0]_ttxt-lb[R:{zeroBasedIndex}]";
+
+                SafeActions.Click(driver, By.Id(selector),
+                    $"I Select No {recordNumber} Record From Graphical Table Records");
+                Task.Delay(5000).Wait();
+            });
+
+         }
+
+         public void PressOkDialogSelectShiftButton() =>
+         AllureLogger.LogStep("I Press Ok dialog select Shift button", () =>
+             SafeActions.Click(driver,
+               By.CssSelector("#m3945131e-pb"),
+               "I Press Ok dialog select Shift button"));
+
+         public void GoToTabWorkView() =>
+         AllureLogger.LogStep("I go to tab Work View", () =>
+             SafeActions.Click(driver,
+               By.Id("mffa89387-tab_anchor"),
+               "I go to tab Work View"));
+
+
+         public void WaitForWorkViewPageToLoad() =>
+        AllureLogger.LogStep("I wait for Work View page to load", () =>
+        {
+            Task.Delay(250000).Wait();
+           
+        });
+
+
+         public void TakeScreenshotOfAllocatingATrainerClassroomTraineesToATrainingCourseInGraphicalAssignmentTestScenarioOne() =>
+         AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-008ASC01", () =>
+         {
+             try
+             {
+                 Task.Delay(5000).Wait();
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+                 string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-008ASC01.png";
+
+                 takescreenshot.TakeScreenshot(driver, successPath);
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+                 // Attempt fallback screenshot on failure
+                 var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-008ASC01_Failure.png";
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+
+                 takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+                 // Optional: Rethrow if test should fail
+                 throw new Exception("Test failed while taking screenshot.", ex);
+             }
+         });
+
+        public void TakeScreenshotOfAllocatingATrainerClassroomTraineesToATrainingCourseInGraphicalAssignmentTestScenariotwo() =>
+         AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-008ASC02", () =>
+         {
+             try
+             {
+                 Task.Delay(5000).Wait();
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+                 string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-008ASC02.png";
+
+                 takescreenshot.TakeScreenshot(driver, successPath);
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+                 // Attempt fallback screenshot on failure
+                 var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-008ASC02_Failure.png";
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+
+                 takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+                 // Optional: Rethrow if test should fail
+                 throw new Exception("Test failed while taking screenshot.", ex);
+             }
+         });
+
+
+
+
+
+
+        // Allocating a Trainee to a Training Course (in Work Order Tracking)  POM Steps Definitions
+
+
+
+
+
+
+        public void TakeScreenshotOfAllocatingATraineeToATrainingCourseInWorkOrderTrackingTestScenarioOne() =>
+         AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-008BSC01", () =>
+         {
+             try
+             {
+                 Task.Delay(5000).Wait();
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+                 string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-008BSC01.png";
+
+                 takescreenshot.TakeScreenshot(driver, successPath);
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+                 // Attempt fallback screenshot on failure
+                 var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-008BSC01_Failure.png";
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+
+                 takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+                 // Optional: Rethrow if test should fail
+                 throw new Exception("Test failed while taking screenshot.", ex);
+             }
+         });
+
+
+
+        public void FilterTableCMSCourseWorkOrderMXR(string Description, string Status) =>
+        AllureLogger.LogStep($"I filter table CMS Course Work Order (MXR) Description = '{Description}', Status = '{Status}'", () =>
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+
+            // Adjust column indexes if needed
+            By DescriptionLocator = By.CssSelector("#m6a7dfd2f_tfrow_\\[C\\:3\\]_txt-tb");
+            By StatusLocator = By.CssSelector("#m6a7dfd2f_tfrow_\\[C\\:7\\]_txt-tb");
+
+            // Description filter
+            IWebElement DescriptionFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(DescriptionLocator));
+            DescriptionFilter.Click();
+            DescriptionFilter.Clear();
+            DescriptionFilter.SendKeys(Description);
+
+            // Status filter
+            IWebElement StatusFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(StatusLocator));
+            StatusFilter.Click();
+            StatusFilter.Clear();
+            StatusFilter.SendKeys(Status );
+            StatusFilter.SendKeys(Keys.Enter);
+            Task.Delay(5000).Wait();
+        });
+
+
+         public void SelectNewRowButtonUnderAssignmentsSection() =>
+         AllureLogger.LogStep("I select New Row button under Assignments section", () =>
+             SafeActions.Click(driver,
+               By.CssSelector("#m6798a95d_bg_button_addrow-pb"),
+               "I select New Row button under Assignments section"));
+
+
+         public void DetailMenuOfTheCraftField() =>
+         AllureLogger.LogStep("Detail Menu of the Craft Field", () =>
+             SafeActions.Click(driver,
+               By.CssSelector("#m278760cb-img"),
+               "Detail Menu of the Craft Field"));
+
+         public void SelectValueOfTheCraftField() =>
+         AllureLogger.LogStep("I Select Value of the Craft Field", () =>
+             SafeActions.Click(driver,
+               By.Id("NORMAL_normal0_a_tnode"),
+               "I Select Value of the Craft Field"));
+
+         public void FilterCraftTable(string Craft) =>
+         AllureLogger.LogStep($"I filter Craft'{Craft}'", () =>
+         {
+             By filterFieldLocator = By.CssSelector("#lookup_page1_tfrow_\\[C\\:0\\]_txt-tb");
+
+             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+             IWebElement filterField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(filterFieldLocator));
+
+             filterField.Click();
+             filterField.Clear();
+             filterField.SendKeys(Craft);
+             filterField.SendKeys(Keys.Enter);
+             Task.Delay(5000).Wait();
+         });
+
+         public void SelectNoFromCraftTableRecords(int recordNumber)
+         {
+            AllureLogger.LogStep($"I Select No {recordNumber} Record From Craft Table Records", () =>
+            {
+                // Assuming your selector needs to change row index [R:x] with recordNumber - 1 (zero-based)
+                int zeroBasedIndex = recordNumber - 1;
+
+                // Build dynamic Id selector by replacing the row index [R:x]
+                string selector = $"lookup_page1_tdrow_[C:0]_ttxt-lb[R:{zeroBasedIndex}]";
+
+                SafeActions.Click(driver, By.Id(selector),
+                    $"I Select No {recordNumber} Record From Craft Table Records");
+                Task.Delay(5000).Wait();
+            });
+         }
+
+
+         public void FilterCraftAndSkillLevelTable(string Craft, string SkillLevel) =>
+        AllureLogger.LogStep($"I filter Craft and skill level table Craft = '{Craft}', SkillLevel = '{SkillLevel}'", () =>
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+
+            // Adjust column indexes if needed
+            By CraftLocator = By.CssSelector("#lookup_page1_tfrow_\\[C\\:0\\]_txt-tb");
+            By SkillLevelLocator = By.CssSelector("#lookup_page1_tfrow_\\[C\\:1\\]_txt-tb");
+
+            // Description filter
+            IWebElement CraftFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(CraftLocator));
+            CraftFilter.Click();
+            CraftFilter.Clear();
+            CraftFilter.SendKeys(Craft);
+
+            // Status filter
+            IWebElement SkillLevelFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SkillLevelLocator));
+            SkillLevelFilter.Click();
+            SkillLevelFilter.Clear();
+            SkillLevelFilter.SendKeys(SkillLevel);
+            SkillLevelFilter.SendKeys(Keys.Enter);
+            Task.Delay(5000).Wait();
+        });
+
+
+
+         public void SelectNoFromCraftAndSkillLevlTableRecords(int recordNumber)
+         {
+            AllureLogger.LogStep($"I Select No {recordNumber} Record From Craft and skill levl Table Records", () =>
+            {
+                // Assuming your selector needs to change row index [R:x] with recordNumber - 1 (zero-based)
+                int zeroBasedIndex = recordNumber - 1;
+
+                // Build dynamic Id selector by replacing the row index [R:x]
+                string selector = $"lookup_page1_tdrow_[C:0]_ttxt-lb[R:{zeroBasedIndex}]";
+
+                SafeActions.Click(driver, By.Id(selector),
+                    $"I Select No {recordNumber} Record From Craft and skill levl Table Records");
+                Task.Delay(5000).Wait();
+            });
+         }
+
+        public void DetailMenuOflaborField() =>
+         AllureLogger.LogStep("Detail Menu of the labor Field", () =>
+             SafeActions.Click(driver,
+               By.CssSelector("#m5080505d-img"),
+               "Detail Menu of the labor Field"));
+
+         public void SelectValueOflaborField() =>
+         AllureLogger.LogStep("I Select Value of the labor Field", () =>
+             SafeActions.Click(driver,
+               By.Id("NORMAL_normal0_a_tnode"),
+               "I Select Value of the labor Field"));
+
+
+         public void SelectNoFromLaborTableRecords(int recordNumber)
+         {
+            AllureLogger.LogStep($"I Select No {recordNumber} Record From labor Table Records", () =>
+            {
+                // Assuming your selector needs to change row index [R:x] with recordNumber - 1 (zero-based)
+                int zeroBasedIndex = recordNumber - 1;
+
+                // Build dynamic Id selector by replacing the row index [R:x]
+                string selector = $"lookup_page1_tdrow_[C:0]_ttxt-lb[R:{zeroBasedIndex}]";
+
+                SafeActions.Click(driver, By.Id(selector),
+                    $"I Select No {recordNumber} Record From labor Table Records");
+                Task.Delay(5000).Wait();
+            });
+         }
+
+         public void VerifyAssignmentsStatusIsASSIGNED() =>
+        AllureLogger.LogStep("I verify Assignments status is ASSIGNED", () =>
+        {
+             try
+             {
+
+                  Task.Delay(10000).Wait();
+                  WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
+
+                  // Wait for the status field to be visible
+                  var statusField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#mba672106-tb")));
+
+                  // Get the actual value of the field
+                  string actualStatus = statusField.GetAttribute("value")?.Trim();
+
+                // Verify the status is exactly "ASSIGNED"
+                if (!string.Equals(actualStatus, "ASSIGNED", StringComparison.OrdinalIgnoreCase))
+                  {
+                      throw new Exception($"Assignments: Status is not ASSIGNED. Actual value: '{actualStatus ?? "null"}'");
+                  }
+
+                      Console.WriteLine("Success: Status is ASSIGNED.");
+                 }
+                 catch (NoSuchElementException ex)
+                 {
+                     Console.WriteLine("Error: Status element not found - " + ex.Message);
+                     throw;
+                 }
+                 catch (Exception ex)
+                 {
+                     Console.WriteLine("Error: " + ex.Message);
+                     throw;
+                 }
+        });
+
+
+
+        public void TakeScreenshotOfAllocatingATraineeToATrainingCourseInWorkOrderTrackingTestScenariotwo() =>
+         AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-008BSC02", () =>
+         {
+             try
+             {
+                 Task.Delay(5000).Wait();
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+                 string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-008BSC02.png";
+
+                 takescreenshot.TakeScreenshot(driver, successPath);
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+                 // Attempt fallback screenshot on failure
+                 var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-008BSC02_Failure.png";
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+
+                 takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+                 // Optional: Rethrow if test should fail
+                 throw new Exception("Test failed while taking screenshot.", ex);
+             }
+         });
+
+
+
+
+
+
+        //  Allocating a Trainee to a Training Course (in Work Order Tracking) 8C POM Steps Definitions
+
+
+
+
+
+         public void TakeScreenshotOfAllocatingTraineeTrainingCourseInWorkOrderTrackingTestScenarioOne() =>
+         AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-008CSC01", () =>
+         {
+             try
+             {
+                 Task.Delay(5000).Wait();
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+                 string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-008CSC01.png";
+
+                 takescreenshot.TakeScreenshot(driver, successPath);
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+                 // Attempt fallback screenshot on failure
+                 var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-008CSC01_Failure.png";
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+
+                 takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+                 // Optional: Rethrow if test should fail
+                 throw new Exception("Test failed while taking screenshot.", ex);
+             }
+         });
+
+
+         public void TakeScreenshotOfAllocatingTraineeTrainingCourseInWorkOrderTrackingTestScenariotwo() =>
+         AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-008CSC02", () =>
+         {
+             try
+             {
+                 Task.Delay(5000).Wait();
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+                 string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-008CSC02.png";
+
+                 takescreenshot.TakeScreenshot(driver, successPath);
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+                 // Attempt fallback screenshot on failure
+                 var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-008CSC02_Failure.png";
+                 var takescreenshot = new TakeScreenShotPOM(driver);
+
+                 takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+                 // Optional: Rethrow if test should fail
+                 throw new Exception("Test failed while taking screenshot.", ex);
+             }
+         });
+
+
+
+
+
+
+
+        // Assigning a Work Order to a Labour Record - Qualification Match POM Steps Definitions
+
+
+
+
+
+
+         public void GoToTeamLeaderRoutineWorkTab() =>
+         AllureLogger.LogStep("I go to Team Leader Routine Work Tab", () =>
+             SafeActions.Click(driver,
+               By.Id("m1e20cba1-sct_anchor_2"),
+               "I go to Team Leader Routine Work Tab"));
+
+         public void SelectWorkOrderFromTheRoutineWorkOrdersToSchedulePortlet() =>
+         AllureLogger.LogStep("I select Work Order from the Routine Work Orders to Schedule portlet", () =>
+             SafeActions.Click(driver,
+               By.XPath("//*[@id='rsportletdata_352892']/table/tbody/tr[3]/td[1]/a"),
+               "I select Work Order from the Routine Work Orders to Schedule portlet"));
+
+        public void TakeScreenshotOfAssigningAWorkOrderToALabourRecordQualificationMatchTest() =>
+        AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-0010A", () =>
+        {
+            try
+            {
+                Task.Delay(5000).Wait();
+                var takescreenshot = new TakeScreenShotPOM(driver);
+                string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-0010A.png";
+
+                takescreenshot.TakeScreenshot(driver, successPath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+                // Attempt fallback screenshot on failure
+                var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-0010A_Failure.png";
+                var takescreenshot = new TakeScreenShotPOM(driver);
+
+                takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+                // Optional: Rethrow if test should fail
+                throw new Exception("Test failed while taking screenshot.", ex);
+            }
+        });
+
+
+
+
+        // Labor Skill-Level Check - Update skill-levels POM Steps Definitions
+
+
+
+        public void OpenApplicationBusinessRulesBRDB() =>
+           AllureLogger.LogStep("Open Application Business Rules BRDB", () =>
+               SafeActions.Click(driver,
+                   By.Id("menu0_SETUP_MODULE_sub_changeapp_BRDBRULES_a_tnode"),
+                   "Open Application Business Rules BRDB"));
+
+         public void FilterTableBusinessRule(string BusinessRule) =>
+         AllureLogger.LogStep($"I filter Business Rule'{BusinessRule}'", () =>
+         {
+             By filterFieldLocator = By.CssSelector("#m6a7dfd2f_tfrow_\\[C\\:1\\]_txt-tb");
+
+             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+             IWebElement filterField = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(filterFieldLocator));
+
+             filterField.Click();
+             filterField.Clear();
+             filterField.SendKeys(BusinessRule);
+             filterField.SendKeys(Keys.Enter);
+             Task.Delay(5000).Wait();
+         });
+
+
+         public void SelectNoRecordFromBusinessRuleTableRecords(int recordNumber)
+         {
+            AllureLogger.LogStep($"I Select No {recordNumber} Record From Business Rule Table Records", () =>
+            {
+                // Assuming your selector needs to change row index [R:x] with recordNumber - 1 (zero-based)
+                int zeroBasedIndex = recordNumber - 1;
+
+                // Build dynamic Id selector by replacing the row index [R:x]
+                string selector = $"m6a7dfd2f_tdrow_[C:1]_ttxt-lb[R:{zeroBasedIndex}]";
+
+                SafeActions.Click(driver, By.Id(selector),
+                    $"I Select No {recordNumber} Record From Business Rule Table Records");
+                Task.Delay(5000).Wait();
+            });
+         }
+
+
+        public void SelectNewRowButtonUnderTheListValuesForMXRCMSSKILLLEVELSection() =>
+         AllureLogger.LogStep("I select New Row button under the List Values for MXRCMSSKILLLEVEL section", () =>
+             SafeActions.Click(driver,
+               By.CssSelector("#m26aedc28_bg_button_addrow-pb"),
+               "I select New Row button under the List Values for MXRCMSSKILLLEVEL section"));
+
+
+         public void EnterSkillLevelDetails(string Skilllevel, string Description) =>
+        AllureLogger.LogStep($"I Skill level Details = Skill level '{Skilllevel}', Description = '{Description}'", () =>
+        {
+           WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+
+            // Adjust column indexes if needed
+            By SkilllevelLocator = By.CssSelector("#m5a3a685c-tb");
+            By DescriptionLocator = By.CssSelector("#m5a3a685c-tb2");
+           
+            // Description filter
+            IWebElement SkilllevelFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SkilllevelLocator));
+            SkilllevelFilter.Click();
+            SkilllevelFilter.Clear();
+            SkilllevelFilter.SendKeys(Skilllevel);
+
+            // Status filter
+            IWebElement DescriptionFilter = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(DescriptionLocator));
+            DescriptionFilter.Click();
+            DescriptionFilter.Clear();
+            DescriptionFilter.SendKeys(Description);
+        });
+
+
+        public void TakeScreenshotOfLaborSkillLevelCheckUpdateSkillLevelsTestScenarioOne() =>
+        AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-0012SC01", () =>
+        {
+            try
+            {
+                Task.Delay(5000).Wait();
+                var takescreenshot = new TakeScreenShotPOM(driver);
+                string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-0012SC01.png";
+
+                takescreenshot.TakeScreenshot(driver, successPath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+                // Attempt fallback screenshot on failure
+                var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-0012SC01_Failure.png";
+                var takescreenshot = new TakeScreenShotPOM(driver);
+
+                takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+                // Optional: Rethrow if test should fail
+                throw new Exception("Test failed while taking screenshot.", ex);
+            }
+        });
+
+
+        public void SelectDeleteButtonUnderTheListValuesForMXRCMSSKILLLEVELSection() =>
+         AllureLogger.LogStep("I select delete button under the List Values for MXRCMSSKILLLEVEL section", () =>
+             SafeActions.Click(driver,
+               By.Id("m26aedc28_tdrow_[C:7]_toggleimage-ti[R:0]_img"),
+               "I select delete button under the List Values for MXRCMSSKILLLEVEL section"));
+
+
+         public void TakeScreenshotOfDeletingUpdatedSkillLevelsTest() =>
+        AllureLogger.LogStep("Capture Screenshot for GTR-UAT-CMS-0012SC02", () =>
+        {
+            try
+            {
+                Task.Delay(5000).Wait();
+                var takescreenshot = new TakeScreenShotPOM(driver);
+                string successPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\GTR-UAT-CMS-0012SC02.png";
+
+                takescreenshot.TakeScreenshot(driver, successPath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Screenshot failed: {ex.Message}");
+
+                // Attempt fallback screenshot on failure
+                var failureScreenshotPath = @"C:\Documents\GTR_AUTOMATED\Screenshots\Failures\GTR-UAT-CMS-0012SC02_Failure.png";
+                var takescreenshot = new TakeScreenShotPOM(driver);
+
+                takescreenshot.TakeScreenshot(driver, failureScreenshotPath);
+
+                // Optional: Rethrow if test should fail
+                throw new Exception("Test failed while taking screenshot.", ex);
+            }
+        });
+
+        public void VerifyTableSkillLevelsHasNoRecords()
+        {
+            AllureLogger.LogStep("I verify table has There are no rows to display", () =>
+            {
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
+
+                // Wait for the "There are no rows to display" element or rows to be present
+                var rowsOrEmptyMessage = wait.Until(driver =>
+                {
+                    var elements = driver.FindElements(By.Id("m26aedc28_tbod_tempty_tcell_statictext-lb"));
+                    return elements.Count > 0 ? elements : null;
+                });
+
+                // Check the text content of the element
+                var placeholder = rowsOrEmptyMessage.FirstOrDefault();
+
+                if (placeholder == null)
+                {
+                    throw new Exception("Could not find the placeholder element for 'There are no rows to display'.");
+                }
+
+                string message = placeholder.Text.Trim();
+
+                if (!message.Contains("There are no rows to display", StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new Exception($"Expected There are no rows to display message, but found: '{message}'");
+                }
+
+                Console.WriteLine("✅ Table correctly shows: " + message);
+            });
+        }
 
 
 

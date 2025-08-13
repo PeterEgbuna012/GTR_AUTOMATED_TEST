@@ -135,12 +135,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
  await testRunner.AndAsync("I open application Toilet Checker (MXR)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table391 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table437 = new global::Reqnroll.Table(new string[] {
                             "Toilet Checker"});
-                table391.AddRow(new string[] {
+                table437.AddRow(new string[] {
                             "171728"});
 #line 10
- await testRunner.AndAsync("I filter table Toilet Checker:", ((string)(null)), table391, "And ");
+ await testRunner.AndAsync("I filter table Toilet Checker:", ((string)(null)), table437, "And ");
 #line hidden
 #line 13
  await testRunner.AndAsync("I select View Details arrow", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -148,12 +148,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 14
  await testRunner.AndAsync("I press button Lock/Unlock a Toilet Asset", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table392 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table438 = new global::Reqnroll.Table(new string[] {
                             "Comment"});
-                table392.AddRow(new string[] {
+                table438.AddRow(new string[] {
                             "Lock/Unlock a Toilet Asset Test"});
 #line 15
- await testRunner.AndAsync("I enter following Toilet Checker data:", ((string)(null)), table392, "And ");
+ await testRunner.AndAsync("I enter following Toilet Checker data:", ((string)(null)), table438, "And ");
 #line hidden
 #line 18
  await testRunner.AndAsync("I press ok button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -173,12 +173,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 23
  await testRunner.AndAsync("I press dialog button no", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table393 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table439 = new global::Reqnroll.Table(new string[] {
                             "Comment"});
-                table393.AddRow(new string[] {
+                table439.AddRow(new string[] {
                             "Lock/Unlock a Toilet Asset Test Update"});
 #line 24
- await testRunner.AndAsync("I enter following Toilet Checker data:", ((string)(null)), table393, "And ");
+ await testRunner.AndAsync("I enter following Toilet Checker data:", ((string)(null)), table439, "And ");
 #line hidden
 #line 27
  await testRunner.AndAsync("I press ok button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");

@@ -132,6 +132,7 @@ namespace GTR_Automated_Tests.Pages
          SafeActions.Click(driver,
              By.Id(selector),
              $"I Select No {recordNumber} Record From Location Table Records");
+         Task.Delay(5000).Wait();
      });
 
           public void SelectNoRecordFromWorkTypeTableRecords(int recordNumber) =>
@@ -162,6 +163,7 @@ namespace GTR_Automated_Tests.Pages
               SafeActions.Click(driver,
                  By.Id(selector),
                  $"I Select No {recordNumber} From Location Table Records");
+            Task.Delay(5000).Wait();
         });
 
         public void SelectValueLookupForWorkTypeField() =>
@@ -181,6 +183,7 @@ namespace GTR_Automated_Tests.Pages
           filterField.Clear();
           filterField.SendKeys(WorkType);
           filterField.SendKeys(Keys.Enter);
+          Task.Delay(2000).Wait();
       });
 
         public void SelectNoFromWorkTypeTableRecords(int recordNumber)

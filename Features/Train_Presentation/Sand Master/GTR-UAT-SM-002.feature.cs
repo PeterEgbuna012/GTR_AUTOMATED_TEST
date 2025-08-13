@@ -135,12 +135,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 8
     await testRunner.AndAsync("I open application Sand Master (MXR) from Fav Menu", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table386 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table432 = new global::Reqnroll.Table(new string[] {
                             "ID"});
-                table386.AddRow(new string[] {
+                table432.AddRow(new string[] {
                             "171"});
 #line 9
-    await testRunner.AndAsync("I filter table Sand Master (MXR):", ((string)(null)), table386, "And ");
+    await testRunner.AndAsync("I filter table Sand Master (MXR):", ((string)(null)), table432, "And ");
 #line hidden
 #line 12
     await testRunner.AndAsync("I select button Fill Sand Box", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
