@@ -137,71 +137,75 @@ this.ScenarioInitialize(scenarioInfo);
 #line 10
  await testRunner.AndAsync("I select create new record", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
+                global::Reqnroll.Table table138 = new global::Reqnroll.Table(new string[] {
+                            "Description"});
+                table138.AddRow(new string[] {
+                            "Completing a CM Work Order for Review"});
 #line 11
- await testRunner.AndAsync("I set CM Work Order Description field to \'Completing a CM Work Order for Review\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("I enter work order:", ((string)(null)), table138, "And ");
 #line hidden
-#line 12
+#line 14
  await testRunner.AndAsync("I choose Select Value from Detail Menu of Location field", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table88 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table139 = new global::Reqnroll.Table(new string[] {
                             "Location"});
-                table88.AddRow(new string[] {
+                table139.AddRow(new string[] {
                             "387102"});
-#line 13
- await testRunner.AndAsync("I filter table Location:", ((string)(null)), table88, "And ");
+#line 15
+ await testRunner.AndAsync("I filter table Location:", ((string)(null)), table139, "And ");
 #line hidden
-#line 16
+#line 18
  await testRunner.AndAsync("I select no. 1 from Location table records", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 17
+#line 19
  await testRunner.AndAsync("I open Select Value lookup for Work Type field", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table89 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table140 = new global::Reqnroll.Table(new string[] {
                             "Type"});
-                table89.AddRow(new string[] {
+                table140.AddRow(new string[] {
                             "=CM"});
-#line 18
- await testRunner.AndAsync("I filter table Work Type:", ((string)(null)), table89, "And ");
+#line 20
+ await testRunner.AndAsync("I filter table Work Type:", ((string)(null)), table140, "And ");
 #line hidden
-#line 21
+#line 23
  await testRunner.AndAsync("I select no. 1 from Work Type table records", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 22
+#line 24
  await testRunner.AndAsync("I choose Select Value from Detail Menu of Repair Facility", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table90 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table141 = new global::Reqnroll.Table(new string[] {
                             "Repair Facility"});
-                table90.AddRow(new string[] {
+                table141.AddRow(new string[] {
                             "HORNSEY"});
-#line 23
- await testRunner.AndAsync("I filter table Repair Facility:", ((string)(null)), table90, "And ");
+#line 25
+ await testRunner.AndAsync("I filter table Repair Facility:", ((string)(null)), table141, "And ");
 #line hidden
-#line 26
+#line 28
  await testRunner.AndAsync("I select no. 1 record from Repair Facility table records", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 27
+#line 29
  await testRunner.AndAsync("I open Select Value lookup for Priority field", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table91 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table142 = new global::Reqnroll.Table(new string[] {
                             "Value"});
-                table91.AddRow(new string[] {
+                table142.AddRow(new string[] {
                             "Next Exam"});
-#line 28
- await testRunner.AndAsync("I filter table Priority field:", ((string)(null)), table91, "And ");
-#line hidden
-#line 31
- await testRunner.AndAsync("I select no. 1 record from Priority table records", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 32
- await testRunner.AndAsync("I Scheduled Start Date to today\'s date", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line 30
+ await testRunner.AndAsync("I filter table Priority field:", ((string)(null)), table142, "And ");
 #line hidden
 #line 33
- await testRunner.AndAsync("I save CM record", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("I select no. 1 record from Priority table records", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 34
- await testRunner.AndAsync("I verify generated work order number", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("I Scheduled Start Date to today\'s date", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 35
+ await testRunner.AndAsync("I save CM record", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 36
+ await testRunner.AndAsync("I verify generated work order number", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 37
  await testRunner.AndAsync("I take screenshot of Completing a CM Work Order for Review test Scenario two", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
@@ -217,7 +221,7 @@ this.ScenarioInitialize(scenarioInfo);
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("role", role);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("02) Assigning a CM Work Order", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 43
+#line 45
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -227,68 +231,68 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 44
+#line 46
  await testRunner.GivenAsync("I sign as teamlead", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 45
+#line 47
   await testRunner.AndAsync("I open application Work Order Tracking BRDA from Favorite Menu", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table92 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table143 = new global::Reqnroll.Table(new string[] {
                             "Description",
                             "Status"});
-                table92.AddRow(new string[] {
+                table143.AddRow(new string[] {
                             "Completing a CM Work Order for Review",
                             "=WAIT-REV"});
-#line 46
-  await testRunner.AndAsync("I filter table CM Work Order:", ((string)(null)), table92, "And ");
-#line hidden
-#line 49
-  await testRunner.AndAsync("I select no. 1 record from CM Work Order table records", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 50
-  await testRunner.AndAsync("I press route the workflow button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line 48
+  await testRunner.AndAsync("I filter table CM Work Order:", ((string)(null)), table143, "And ");
 #line hidden
 #line 51
-  await testRunner.AndAsync("I set (Radio) field to Accept this Work Order into the Work Bank", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+  await testRunner.AndAsync("I select no. 1 record from CM Work Order table records", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 52
-  await testRunner.AndAsync("I select dialog button ok", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 53
   await testRunner.AndAsync("I press route the workflow button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
+#line 53
+  await testRunner.AndAsync("I set (Radio) field to Accept this Work Order into the Work Bank", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
 #line 54
-  await testRunner.AndAsync("I set (Radio) field to Send Work for Execution", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+  await testRunner.AndAsync("I select dialog button ok", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 55
-  await testRunner.AndAsync("I select Ok dialog button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+  await testRunner.AndAsync("I press route the workflow button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 56
-  await testRunner.AndAsync("I go to Assignments Tab", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+  await testRunner.AndAsync("I set (Radio) field to Send Work for Execution", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 57
-  await testRunner.AndAsync("I add new row in Assignments Tab", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+  await testRunner.AndAsync("I select Ok dialog button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 58
+  await testRunner.AndAsync("I go to Assignments Tab", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 59
+  await testRunner.AndAsync("I add new row in Assignments Tab", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 60
   await testRunner.AndAsync("I open Select Value lookup for Labor field", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table93 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table144 = new global::Reqnroll.Table(new string[] {
                             "Labor"});
-                table93.AddRow(new string[] {
+                table144.AddRow(new string[] {
                             "ISCOTT"});
-#line 59
-  await testRunner.AndAsync("I filter table Labor:", ((string)(null)), table93, "And ");
-#line hidden
-#line 62
-  await testRunner.AndAsync("I select no. 2 record from Labor table records", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line 61
+  await testRunner.AndAsync("I filter table Labor:", ((string)(null)), table144, "And ");
 #line hidden
 #line 64
-  await testRunner.AndAsync("I verify CM work order generated", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 65
-  await testRunner.AndAsync("I save record", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+  await testRunner.AndAsync("I select no. 2 record from Labor table records", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 66
+  await testRunner.AndAsync("I verify CM work order generated", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 67
+  await testRunner.AndAsync("I save record", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 68
   await testRunner.AndAsync("I take screenshot of Completing a CM Work Order for Review test Scenario one", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
@@ -304,7 +308,7 @@ this.ScenarioInitialize(scenarioInfo);
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("role", role);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("03) Completing a CM Work Order for Review", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 76
+#line 78
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -314,119 +318,119 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 77
+#line 79
  await testRunner.GivenAsync("I sign as teamlead", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 78
+#line 80
     await testRunner.AndAsync("I open application Work Order Tracking (BRDA)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table94 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table145 = new global::Reqnroll.Table(new string[] {
                             "Description",
                             "Status",
                             "Work Type"});
-                table94.AddRow(new string[] {
+                table145.AddRow(new string[] {
                             "Completing a CM Work Order for Review",
                             "=SCHEDULED",
                             "=CM"});
-#line 79
- await testRunner.AndAsync("I filter table CM:", ((string)(null)), table94, "And ");
-#line hidden
-#line 82
- await testRunner.AndAsync("I select no. 1 record from CM Work Order table records", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 83
- await testRunner.AndAsync("I press route the workflow button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line 81
+ await testRunner.AndAsync("I filter table CM:", ((string)(null)), table145, "And ");
 #line hidden
 #line 84
-    await testRunner.AndAsync("I set (Radio) field to Start Work order", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("I select no. 1 record from CM Work Order table records", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 85
-    await testRunner.AndAsync("I select Ok button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 86
  await testRunner.AndAsync("I press route the workflow button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
+#line 86
+    await testRunner.AndAsync("I set (Radio) field to Start Work order", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
 #line 87
- await testRunner.AndAsync("I select (Radio) Box Complete Work Assignment", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.AndAsync("I select Ok button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 88
-    await testRunner.AndAsync("I press the button Ok", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("I press route the workflow button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 89
-    await testRunner.AndAsync("I press the button Close", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("I select (Radio) Box Complete Work Assignment", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 90
- await testRunner.AndAsync("I go to actuals Tab", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.AndAsync("I press the button Ok", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 91
- await testRunner.AndAsync("I select new row under labor section", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.AndAsync("I press the button Close", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 92
+ await testRunner.AndAsync("I go to actuals Tab", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 93
+ await testRunner.AndAsync("I select new row under labor section", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 94
  await testRunner.AndAsync("I choose select value from detail menu of labor field", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table95 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table146 = new global::Reqnroll.Table(new string[] {
                             "Labor"});
-                table95.AddRow(new string[] {
+                table146.AddRow(new string[] {
                             "ISCOTT"});
-#line 93
- await testRunner.AndAsync("I filter table actuals labor:", ((string)(null)), table95, "And ");
-#line hidden
-#line 96
- await testRunner.AndAsync("I select no. 4 record from Labor table record", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 97
- await testRunner.AndAsync("I set Start and End time", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line 95
+ await testRunner.AndAsync("I filter table actuals labor:", ((string)(null)), table146, "And ");
 #line hidden
 #line 98
-    await testRunner.AndAsync("I press route the workflow button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("I select no. 4 record from Labor table record", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 99
- await testRunner.AndAsync("I press the button Close", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("I set Start and End time", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 100
- await testRunner.ThenAsync("the record is saved successfully", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-#line 101
-    await testRunner.AndAsync("I go to Failure Reporting", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 102
-    await testRunner.AndAsync("I press dialog button Select Failure Codes", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-                global::Reqnroll.Table table96 = new global::Reqnroll.Table(new string[] {
-                            "Failure Codes"});
-                table96.AddRow(new string[] {
-                            "171-FC-02"});
-#line 103
- await testRunner.AndAsync("I filter table Failure Codes:", ((string)(null)), table96, "And ");
-#line hidden
-#line 106
- await testRunner.AndAsync("I select Faliure Informations", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 107
- await testRunner.AndAsync("I go to tab Log", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 108
- await testRunner.AndAsync("I press add new row button under Log section", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-                global::Reqnroll.Table table97 = new global::Reqnroll.Table(new string[] {
-                            "Summary",
-                            "Details"});
-                table97.AddRow(new string[] {
-                            "CM WO AUTO TEST",
-                            "CM WORK ORDER AUTO TEST"});
-#line 109
- await testRunner.AndAsync("I enter following data:", ((string)(null)), table97, "And ");
-#line hidden
-#line 112
-    await testRunner.ThenAsync("the record is saved successfully", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-#line 113
     await testRunner.AndAsync("I press route the workflow button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 117
+#line 101
+ await testRunner.AndAsync("I press the button Close", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 102
+ await testRunner.ThenAsync("the record is saved successfully", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 103
+    await testRunner.AndAsync("I go to Failure Reporting", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 104
+    await testRunner.AndAsync("I press dialog button Select Failure Codes", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+                global::Reqnroll.Table table147 = new global::Reqnroll.Table(new string[] {
+                            "Failure Codes"});
+                table147.AddRow(new string[] {
+                            "171-FC-02"});
+#line 105
+ await testRunner.AndAsync("I filter table Failure Codes:", ((string)(null)), table147, "And ");
+#line hidden
+#line 108
+ await testRunner.AndAsync("I select Faliure Informations", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 109
+ await testRunner.AndAsync("I go to tab Log", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 110
+ await testRunner.AndAsync("I press add new row button under Log section", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+                global::Reqnroll.Table table148 = new global::Reqnroll.Table(new string[] {
+                            "Summary",
+                            "Details"});
+                table148.AddRow(new string[] {
+                            "CM WO AUTO TEST",
+                            "CM WORK ORDER AUTO TEST"});
+#line 111
+ await testRunner.AndAsync("I enter following data:", ((string)(null)), table148, "And ");
+#line hidden
+#line 114
+    await testRunner.ThenAsync("the record is saved successfully", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 115
+    await testRunner.AndAsync("I press route the workflow button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 119
     await testRunner.AndAsync("work order Status field has value COMP-WREV", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 118
+#line 120
     await testRunner.AndAsync("I take screenshot of Completing a CM Work Order for Review test Scenario three", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }

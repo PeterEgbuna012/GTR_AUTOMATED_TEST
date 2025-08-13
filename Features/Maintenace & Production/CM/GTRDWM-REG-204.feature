@@ -8,7 +8,9 @@ Scenario: 01) Create a CM Work Order
 	Given I sign as maxadmin
 	And I open application Work Order Tracking (BRDA)
 	And I select create new record
-	And I set CM Work Order Description field to 'Completing a CM Work Order for Review'
+	And I enter work order:
+      | Description |
+      | Completing a CM Work Order for Review |
 	And I choose Select Value from Detail Menu of Location field
 	And I filter table Location:
       | Location |
